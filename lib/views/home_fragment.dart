@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:shopvippro_demo/pages/home_page.dart';
+import 'package:shopvippro_demo/pages/category_page.dart';
+import 'package:shopvippro_demo/pages/cart_page.dart';
+import 'package:shopvippro_demo/pages/profile_page.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+
+class HomeFragment extends StatefulWidget {
+  const HomeFragment({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomeFragment> createState() => _HomeFragmentState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeFragmentState extends State<HomeFragment> {
   int _currentIndex = 0;
   List<Widget> body = const [
     Icon(Icons.home),
@@ -31,7 +36,7 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Colors.black,
         ),
         body: Center(
-          child: body[_currentIndex],
+          child: [HomePage(),CategoryPage(),CartPage(),ProfilePage()][_currentIndex],
         ),
         bottomNavigationBar: NavigationBarTheme(
           data: NavigationBarThemeData(
