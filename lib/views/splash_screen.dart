@@ -31,12 +31,12 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: SizedBox(
         width: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: [
             Image(
               image: AssetImage("lib/assets/logo_app.png"),
               width: 500,
@@ -44,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen>
             SizedBox(
               height: 10,
             ),
-            SpinKitThreeInOut(
+            SpinKitFadingCircle(
               color: Colors.orangeAccent,
               size: 50,
             )
