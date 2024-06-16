@@ -2,10 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:shopvippro_demo/pages/home_page.dart';
-import 'package:shopvippro_demo/pages/category_page.dart';
-import 'package:shopvippro_demo/pages/cart_page.dart';
-import 'package:shopvippro_demo/pages/profile_page.dart';
+import 'package:shopvippro_demo/pages/Home_page.dart';
+import 'package:shopvippro_demo/pages/Category_page.dart';
+import 'package:shopvippro_demo/pages/Cart_page.dart';
+import 'package:shopvippro_demo/pages/Profile_page.dart';
 
 class HomeFragment extends StatefulWidget {
   const HomeFragment({super.key});

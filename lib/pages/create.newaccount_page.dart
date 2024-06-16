@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopvippro_demo/views/home_fragment.dart';
 import 'profile_page.dart';
 
 class NewAccCount extends StatefulWidget {
@@ -18,8 +19,7 @@ class _NewAccCountState extends State<NewAccCount> {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const ProfilePage()));
+            
           },
           child: const Text('Go back!'),
         ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shopvippro_demo/views/splash_screen.dart';
+import 'package:shopvippro_demo/views/Splash_Screen.dart';
 
 void main() {
   runApp(const MyApp());

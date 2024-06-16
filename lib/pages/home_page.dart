@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:shopvippro_demo/models/post.dart';
+import 'package:shopvippro_demo/pages/detail.items_page.dart';
 import 'package:shopvippro_demo/services/remote_post.dart';
 
 class HomePage extends StatefulWidget {
@@ -35,31 +36,69 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
+    return Center(
+      child: GridView.builder(
         shrinkWrap: true,
-        crossAxisCount: 2,
-        children: List.generate(20, (index) {
-          return Container(
-            // padding: EdgeInsets.fromLTRB(0, 30, 0, 30),
-            margin: const EdgeInsets.only(top:20, left: 30.0, right: 30.0),
-            child: Column(children: [
-              Expanded(
-                child: Image.asset(
-                  "lib/assets/produce2.png",
-                ),
+        padding: const EdgeInsets.symmetric(horizontal: 30),
+        itemCount: 10,
+        itemBuilder: (BuildContext context, int index) {
+          return Card(
+              child: InkWell(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => DetailItemsPage()));
+            },
+            child: Container(
+              height: 290,
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(20)),
+              margin: EdgeInsets.all(5),
+              padding: EdgeInsets.all(5),
+              child: Stack(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Expanded(
+                        child: Image.network(
+                          'https://media3.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/October2023/Ao_ni_oversize_basic_84RISING_-_mau_Xanh_duongshoadw2_copy.jpg',
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      Text(
+                        overflow: TextOverflow.ellipsis,
+                        '${posts?[index].title}',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            'Price:',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ],
               ),
-              const SizedBox(height: 10),
-              Text(
-                '${posts?[index].title}',
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.normal,
-                ),
-              ),
-              Text('7.VNĐ'),
-            ]),
-          );
-        }));
+            ),
+          ));
+        },
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 1.0,
+          crossAxisSpacing: 0.0,
+          mainAxisSpacing: 5,
+          mainAxisExtent: 264,
+        ),
+      ),
+    );
   }
 }
