@@ -3,7 +3,7 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:shopvippro_demo/models/post.dart';
-import 'package:shopvippro_demo/pages/detail.items_page.dart';
+import 'package:shopvippro_demo/pages/Item_Details_page.dart';
 import 'package:shopvippro_demo/services/remote_post.dart';
 
 class HomePage extends StatefulWidget {
@@ -34,6 +34,11 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  void navigateToItemDetails(int index) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => ItemDetailsPage()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -43,11 +48,8 @@ class _HomePageState extends State<HomePage> {
         itemCount: 10,
         itemBuilder: (BuildContext context, int index) {
           return Card(
-              child: InkWell(
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => DetailItemsPage()));
-            },
+              child: GestureDetector(
+            onTap: () => navigateToItemDetails(index),
             child: Container(
               height: 290,
               decoration:

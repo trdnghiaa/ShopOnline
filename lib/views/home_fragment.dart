@@ -36,7 +36,7 @@ class _HomeFragmentState extends State<HomeFragment> {
               )),
           centerTitle: true,
           flexibleSpace: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 gradient: LinearGradient(
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,

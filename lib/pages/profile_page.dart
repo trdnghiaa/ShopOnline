@@ -66,7 +66,7 @@ class _ProfilePageState extends State<ProfilePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text('Welcome to LUONVUITUOI',
-                textAlign: TextAlign.center,
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 30,
@@ -121,10 +121,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 Expanded(child: SizedBox.shrink()),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const NewAccCount()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => NewAccCount()));
                   },
                   child: Text('Create New Account ?'),
                   style: ElevatedButton.styleFrom(
