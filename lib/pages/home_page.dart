@@ -5,6 +5,7 @@ import 'package:http/http.dart';
 import 'package:shopvippro_demo/models/post.dart';
 import 'package:shopvippro_demo/pages/Item_Details_page.dart';
 import 'package:shopvippro_demo/services/remote_post.dart';
+import 'package:shopvippro_demo/views/Search_Bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -44,7 +45,7 @@ class _HomePageState extends State<HomePage> {
     return Center(
       child: GridView.builder(
         shrinkWrap: true,
-        padding: const EdgeInsets.symmetric(horizontal: 30),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         itemCount: 10,
         itemBuilder: (BuildContext context, int index) {
           return Card(

@@ -6,6 +6,7 @@ import 'package:shopvippro_demo/pages/Home_page.dart';
 import 'package:shopvippro_demo/pages/Category_page.dart';
 import 'package:shopvippro_demo/pages/Cart_page.dart';
 import 'package:shopvippro_demo/pages/Profile_page.dart';
+import 'package:shopvippro_demo/themes/colors.dart';
 
 class HomeFragment extends StatefulWidget {
   const HomeFragment({super.key});
@@ -32,18 +33,10 @@ class _HomeFragmentState extends State<HomeFragment> {
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 10,
-                color: Colors.white,
+                color: Colors.black,
               )),
           centerTitle: true,
-          flexibleSpace: Container(
-            decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                    colors: <Color>[Colors.purple, Colors.blue])),
-          ),
-          shape: Border(bottom: BorderSide(color: Colors.black38, width: 4)),
-          elevation: 4,
+          backgroundColor: Colors.white,
         ),
         body: SizedBox(
           child: Center(
@@ -60,8 +53,8 @@ class _HomeFragmentState extends State<HomeFragment> {
               labelTextStyle: MaterialStateProperty.all(
             const TextStyle(
               // fontSize: 12.0,
-              color: Colors.black,
-              fontSize: 15,
+              // color: Colors.black,
+              // fontSize: 15,
             ),
           )),
           child: NavigationBar(
@@ -80,7 +73,8 @@ class _HomeFragmentState extends State<HomeFragment> {
               });
             },
             labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-            // backgroundColor: Colors.black,
+            backgroundColor: Colors.white,
+            indicatorColor: Colors.white,
           ),
         ));
   }

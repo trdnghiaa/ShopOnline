@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shopvippro_demo/themes/colors.dart';
+import 'package:shopvippro_demo/views/button.dart';
 
 class ItemDetailsPage extends StatefulWidget {
   const ItemDetailsPage({super.key});
@@ -25,6 +26,9 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
       quantityCount++;
     });
   }
+
+  //add to cart
+  void addToCart() {}
 
   @override
   Widget build(BuildContext context) {
@@ -103,8 +107,8 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
             ),
           )),
           Container(
-            color: primaryColor,
-            padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+            color: itemContainer,
+            padding: const EdgeInsets.fromLTRB(20, 15, 20, 10),
             child: Column(
               children: [
                 //price + quantity
@@ -152,16 +156,13 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
                             onPressed: incrementQuantity,
                           ),
                         )
-                        //quantity count
-
-                        //plus button
                       ],
                     )
-                    // quantity
                   ],
                 ),
+                const SizedBox(height: 20,),
                 //add to cart button
-                ElevatedButton(onPressed: () {}, child: Text('Add to cart'))
+                MyButton(text: "Add to cart", onTap: addToCart),
               ],
             ),
           )

@@ -60,22 +60,14 @@ class _ProfilePageState extends State<ProfilePage> {
       },
       child: Scaffold(
         body: Padding(
-          padding: EdgeInsets.fromLTRB(20, 150, 20, 36),
+          padding: EdgeInsets.fromLTRB(20, 80, 20, 36),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Welcome to LUONVUITUOI',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold)),
-                SizedBox(
-                  height: 50,
-                ),
+                Image(image: AssetImage("lib/assets/logo_app.png"), height: 200,),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  padding: EdgeInsets.symmetric(horizontal: 22),
                   decoration: BoxDecoration(
                       border: Border.all(color: _emailTFColor),
                       borderRadius: BorderRadius.circular(8)),
@@ -91,7 +83,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   height: 12,
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12),
+                  padding: EdgeInsets.symmetric(horizontal: 22),
                   decoration: BoxDecoration(
                       border: Border.all(color: _passwordColor),
                       borderRadius: BorderRadius.circular(8)),
@@ -103,7 +95,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         border: InputBorder.none),
                   ),
                 ),
-                SizedBox(height: 38),
+                SizedBox(height: 20),
                 SizedBox(
                   width: 100,
                   height: 50,
@@ -114,7 +106,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     onPressed: () {},
                     child: Text(
                       'Login',
-                      style: TextStyle(fontSize: 15),
+                      style: TextStyle(fontSize: 18),
                     ),
                   ),
                 ),
@@ -124,11 +116,12 @@ class _ProfilePageState extends State<ProfilePage> {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => NewAccCount()));
                   },
-                  child: Text('Create New Account ?'),
+                  child: Text('Create New Account ?', style: TextStyle(color: Colors.white),),
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
+                    backgroundColor: Colors.blue
                   ),
                 ),
               ],
@@ -139,3 +132,6 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 }
+
+// Navigator.push(context,
+//                         MaterialPageRoute(builder: (context) => NewAccCount()));
