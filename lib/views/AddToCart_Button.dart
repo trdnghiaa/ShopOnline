@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:shopvippro_demo/themes/colors.dart';
 
-class MyButton extends StatelessWidget {
+class AddtoCartButton extends StatelessWidget {
   final String text;
   final void Function()? onTap;
 
-  const MyButton({super.key, required this.text, required this.onTap});
+  const AddtoCartButton({super.key, required this.text, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

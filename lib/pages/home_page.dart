@@ -15,20 +15,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Post>? posts;
+  //api post
+  List<Product>? product;
   var isLoaded = false;
 
   @override
   void initState() {
     super.initState();
-
     //fetch data from API
     getData();
   }
 
   getData() async {
-    posts = await RemoteService().getPosts();
-    if (posts != null) {
+    product = await RemoteService().getProduct();
+    if (product != null) {
       setState(() {
         isLoaded = true;
       });
@@ -37,7 +37,11 @@ class _HomePageState extends State<HomePage> {
 
   void navigateToItemDetails(int index) {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => ItemDetailsPage()));
+      context,
+      MaterialPageRoute(
+        builder: (context) => ItemDetailsPage(product: product![index]),
+      ),
+    );
   }
 
   @override
@@ -46,7 +50,7 @@ class _HomePageState extends State<HomePage> {
       child: GridView.builder(
         shrinkWrap: true,
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        itemCount: 10,
+        itemCount: product?.length ?? 0,
         itemBuilder: (BuildContext context, int index) {
           return Card(
               child: GestureDetector(
@@ -64,22 +68,22 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Expanded(
                         child: Image.network(
-                          'https://media3.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/October2023/Ao_ni_oversize_basic_84RISING_-_mau_Xanh_duongshoadw2_copy.jpg',
+                          '${product?[index].image}',
                           fit: BoxFit.fill,
                         ),
                       ),
                       Text(
                         overflow: TextOverflow.ellipsis,
-                        '${posts?[index].title}',
+                        '${product?[index].title}',
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Row(
                         children: [
                           Text(
-                            'Price:',
+                            '\$ '+ '${product?[index].price}',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 15,
@@ -97,9 +101,9 @@ class _HomePageState extends State<HomePage> {
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 1.0,
-          crossAxisSpacing: 0.0,
-          mainAxisSpacing: 5,
-          mainAxisExtent: 264,
+          crossAxisSpacing: 5.0,
+          mainAxisSpacing: 10,
+          mainAxisExtent: 280,
         ),
       ),
     );

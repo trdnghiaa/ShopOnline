@@ -35,6 +35,13 @@ class _HomeFragmentState extends State<HomeFragment> {
                 letterSpacing: 10,
                 color: Colors.black,
               )),
+          shadowColor: Colors.black,
+          bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(1.0),
+              child: Container(
+                color: Colors.black,
+                height: 1.0,
+              )),
           centerTitle: true,
           backgroundColor: Colors.white,
         ),
@@ -52,14 +59,16 @@ class _HomeFragmentState extends State<HomeFragment> {
           data: NavigationBarThemeData(
               labelTextStyle: MaterialStateProperty.all(
             const TextStyle(
-              // fontSize: 12.0,
-              // color: Colors.black,
-              // fontSize: 15,
+              fontSize: 15,
+              color: Colors.black,
             ),
           )),
           child: NavigationBar(
             destinations: const [
-              NavigationDestination(icon: Icon(Icons.home), label: 'Home', ),
+              NavigationDestination(
+                icon: Icon(Icons.home),
+                label: 'Home',
+              ),
               NavigationDestination(
                   icon: Icon(Icons.category), label: 'Category'),
               NavigationDestination(
@@ -74,7 +83,7 @@ class _HomeFragmentState extends State<HomeFragment> {
             },
             labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
             backgroundColor: Colors.white,
-            indicatorColor: Colors.white,
+            indicatorColor: secondaryColor,
           ),
         ));
   }

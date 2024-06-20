@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shopvippro_demo/views/CreateNewAccount_button.dart';
+import 'package:shopvippro_demo/views/Login_Button.dart';
 import 'Create.Newaccount_page.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -52,6 +54,13 @@ class _ProfilePageState extends State<ProfilePage> {
     });
   }
 
+  void login() {}
+
+  void createAccount() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => NewAccCount()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -65,7 +74,12 @@ class _ProfilePageState extends State<ProfilePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image(image: AssetImage("lib/assets/logo_app.png"), height: 200,),
+                //image
+                Image(
+                  image: AssetImage("lib/assets/logo_app.png"),
+                  height: 200,
+                ),
+                //Textfield Username
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 22),
                   decoration: BoxDecoration(
@@ -82,6 +96,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 SizedBox(
                   height: 12,
                 ),
+                //Textfiled Password
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 22),
                   decoration: BoxDecoration(
@@ -96,33 +111,17 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
                 SizedBox(height: 20),
+                //Login
                 SizedBox(
                   width: 100,
-                  height: 50,
-                  child: FilledButton(
-                    style: ButtonStyle(
-                      backgroundColor: WidgetStatePropertyAll(Colors.blue),
-                    ),
-                    onPressed: () {},
-                    child: Text(
-                      'Login',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  ),
+                  child: LoginButton(text: "Login", onTap: login),
                 ),
                 Expanded(child: SizedBox.shrink()),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => NewAccCount()));
-                  },
-                  child: Text('Create New Account ?', style: TextStyle(color: Colors.white),),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    backgroundColor: Colors.blue
-                  ),
+                //Create new account
+                SizedBox(
+                  width: 200,
+                  child: CreateNewAccountButton(
+                      text: "Create New Account ?", onTap: createAccount),
                 ),
               ],
             ),

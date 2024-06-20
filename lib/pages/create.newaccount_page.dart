@@ -16,12 +16,7 @@ class _NewAccCountState extends State<NewAccCount> {
       appBar: AppBar(
         title: const Text('Create New Account'),
       ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {},
-          child: const Text('Go back!'),
-        ),
-      ),
+      body: Center(child: Text('Create New Account')),
     );
   }
 }

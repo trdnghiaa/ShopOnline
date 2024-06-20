@@ -26,18 +26,4 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-// class MyApp extends StatelessWidget {
-//   const MyApp({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       theme: ThemeData(
-//         textTheme: GoogleFonts.nunitoSansTextTheme(),
-//       ),
-//       home: const SplashScreen(),
-//     );
-//   }
-// }
-
 

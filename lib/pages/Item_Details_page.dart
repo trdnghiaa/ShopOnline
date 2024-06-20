@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shopvippro_demo/themes/colors.dart';
-import 'package:shopvippro_demo/views/button.dart';
+import 'package:shopvippro_demo/views/AddToCart_Button.dart';
+import 'package:shopvippro_demo/models/post.dart';
+import 'package:shopvippro_demo/services/remote_post.dart';
 
 class ItemDetailsPage extends StatefulWidget {
-  const ItemDetailsPage({super.key});
+  final Product product;
+  const ItemDetailsPage({Key? key, required this.product}) : super(key: key);
 
   @override
   State<ItemDetailsPage> createState() => _ItemDetailsPageState();
 }
 
 class _ItemDetailsPageState extends State<ItemDetailsPage> {
+  
 //quantity
   int quantityCount = 0;
 //decrement Quantity
   void decrementQuantity() {
     setState(() {
+      if (quantityCount > 0) {
       quantityCount--;
+    }
     });
   }
 
@@ -49,8 +55,8 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
               children: [
                 //image
                 Image.network(
-                  'https://media3.coolmate.me/cdn-cgi/image/quality=80,format=auto/uploads/October2023/Ao_ni_oversize_basic_84RISING_-_mau_Xanh_duongshoadw2_copy.jpg',
-                  height: 400,
+                  widget.product.image,
+                  height: 350,
                   fit: BoxFit.fill,
                 ),
                 const SizedBox(
@@ -69,7 +75,7 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
                     ),
                     //number
                     Text(
-                      '4.9',
+                      widget.product.rating.rate.toString(),
                       style: TextStyle(
                           color: Colors.grey[600], fontWeight: FontWeight.bold),
                     )
@@ -80,7 +86,7 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
                 ),
                 //name item
                 Text(
-                  'Áo Mùa Hè Cao Cấp',
+                  widget.product.title,
                   style: GoogleFonts.dmSerifDisplay(fontSize: 28),
                 ),
                 const SizedBox(
@@ -98,7 +104,7 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
                   height: 5,
                 ),
                 Text(
-                  '#oversize #unisex #freesize #streetwear #aothunnamnu #bbr #aothuncaocap #aothunamnudep #aothunnam  #aothunbestquality  #aothun #aothunnam #aothunnu #aothunnamnu #aothununisex #aohottrend   #ao #aothun #nam #nu #form #aothunstreetwear #aothunburberrynam #aothunburberrynu  #bbr #aoburberrynam #aoburberrynu #aoburberry #aophongnam #aophongnu #aoburberry',
+                  widget.product.description,
                   style: TextStyle(
                       color: Colors.grey[600], fontSize: 14, height: 2),
                 ),
@@ -117,7 +123,7 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
                   children: [
                     //price
                     Text(
-                      "\$ " + '149.000 VNĐ',
+                      '\$ ' + widget.product.price.toString(),
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -160,9 +166,11 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
                     )
                   ],
                 ),
-                const SizedBox(height: 20,),
+                const SizedBox(
+                  height: 20,
+                ),
                 //add to cart button
-                MyButton(text: "Add to cart", onTap: addToCart),
+                AddtoCartButton(text: "Add to cart", onTap: addToCart),
               ],
             ),
           )
