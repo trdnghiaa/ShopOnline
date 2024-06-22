@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shopvippro_demo/views/home_fragment.dart';
-import 'profile_page.dart';
 
 class NewAccCount extends StatefulWidget {
   const NewAccCount({super.key});

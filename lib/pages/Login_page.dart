@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:shopvippro_demo/profile/Profile_page.dart';
 import 'package:shopvippro_demo/views/CreateNewAccount_button.dart';
 import 'package:shopvippro_demo/views/Login_Button.dart';
 import 'Create.Newaccount_page.dart';
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _LoginPageState extends State<LoginPage> {
   static Color _selectedColor = Colors.black;
   static Color _unSelectedColor = Colors.grey;
 
@@ -54,7 +55,10 @@ class _ProfilePageState extends State<ProfilePage> {
     });
   }
 
-  void login() {}
+  void login() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => ProfilePage()));
+  }
 
   void createAccount() {
     Navigator.push(

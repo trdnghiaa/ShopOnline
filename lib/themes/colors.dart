@@ -3,6 +3,7 @@ import 'package:hexcolor/hexcolor.dart';
 
 var primaryColor = const Color.fromARGB(255, 138, 60, 55);
 var secondaryColor = const Color.fromARGB(109, 140, 94, 91);
-HexColor createAccount = HexColor('D9D9D9');
+
+HexColor createAccount = HexColor('251F47');
 HexColor itemContainer = HexColor('44001A');
-HexColor indicatorBottom = HexColor('F6FEDB');
+HexColor indicatorBottom = HexColor('D2D7DF');

@@ -1,11 +1,11 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:modern_form_line_awesome_icons/modern_form_line_awesome_icons.dart';
+
+import 'package:shopvippro_demo/constants/text_strings.dart';
 import 'package:shopvippro_demo/pages/Home_page.dart';
 import 'package:shopvippro_demo/pages/Category_page.dart';
 import 'package:shopvippro_demo/pages/Cart_page.dart';
-import 'package:shopvippro_demo/pages/Profile_page.dart';
+import 'package:shopvippro_demo/pages/Login_page.dart';
 import 'package:shopvippro_demo/themes/colors.dart';
 
 class HomeFragment extends StatefulWidget {
@@ -28,9 +28,9 @@ class _HomeFragmentState extends State<HomeFragment> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('LUONVUITUOI',
+          title: const Text(tNameApp,
               style: TextStyle(
-                fontSize: 30,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 10,
                 color: Colors.black,
@@ -40,7 +40,7 @@ class _HomeFragmentState extends State<HomeFragment> {
               preferredSize: const Size.fromHeight(1.0),
               child: Container(
                 color: Colors.black,
-                height: 1.0,
+                height: 0.5,
               )),
           centerTitle: true,
           backgroundColor: Colors.white,
@@ -51,7 +51,7 @@ class _HomeFragmentState extends State<HomeFragment> {
               HomePage(),
               CategoryPage(),
               CartPage(),
-              ProfilePage()
+              LoginPage()
             ][_currentIndex],
           ),
         ),
@@ -59,21 +59,28 @@ class _HomeFragmentState extends State<HomeFragment> {
           data: NavigationBarThemeData(
               labelTextStyle: MaterialStateProperty.all(
             const TextStyle(
-              fontSize: 15,
+              fontSize: 17,
               color: Colors.black,
             ),
           )),
           child: NavigationBar(
             destinations: const [
               NavigationDestination(
-                icon: Icon(Icons.home),
-                label: 'Home',
+                icon: Icon(
+                  LineAwesomeIcons.home,
+                  size: 25,
+                ),
+                label: tMenuBottom1,
               ),
               NavigationDestination(
-                  icon: Icon(Icons.category), label: 'Category'),
+                  icon: Icon(LineAwesomeIcons.tasks, size: 25),
+                  label: tMenuBottom2),
               NavigationDestination(
-                  icon: Icon(Icons.shopping_cart), label: 'Cart'),
-              NavigationDestination(icon: Icon(Icons.person), label: 'Me'),
+                  icon: Icon(LineAwesomeIcons.shopping_cart, size: 25),
+                  label: tMenuBottom3),
+              NavigationDestination(
+                  icon: Icon(LineAwesomeIcons.user, size: 25),
+                  label: tMenuBottom4),
             ],
             selectedIndex: _currentIndex,
             onDestinationSelected: (int index) {
@@ -82,8 +89,7 @@ class _HomeFragmentState extends State<HomeFragment> {
               });
             },
             labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-            backgroundColor: Colors.white,
-            indicatorColor: secondaryColor,
+            indicatorColor: indicatorBottom,
           ),
         ));
   }

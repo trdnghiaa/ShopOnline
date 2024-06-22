@@ -12,7 +12,7 @@ class LoginButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.blue,
+          color: Colors.deepPurpleAccent,
           borderRadius: BorderRadius.circular(40),
         ),
         padding: EdgeInsets.all(15),

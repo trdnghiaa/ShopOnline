@@ -4,7 +4,8 @@ import 'package:shopvippro_demo/themes/colors.dart';
 class CreateNewAccountButton extends StatelessWidget {
   final String text;
   final void Function()? onTap;
-  const CreateNewAccountButton({super.key, required this.text, required this.onTap});
+  const CreateNewAccountButton(
+      {super.key, required this.text, required this.onTap});
 
   @override
   Widget build(BuildContext context) {

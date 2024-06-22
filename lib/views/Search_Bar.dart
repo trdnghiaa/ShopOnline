@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-// Flutter code sample for [SearchBar].
-
 class SearchBarApp extends StatefulWidget {
   const SearchBarApp({super.key});
 
@@ -10,18 +8,10 @@ class SearchBarApp extends StatefulWidget {
 }
 
 class _SearchBarAppState extends State<SearchBarApp> {
-  bool isDark = false;
-
   @override
   Widget build(BuildContext context) {
-    final ThemeData themeData = ThemeData(
-        useMaterial3: true,
-        brightness: isDark ? Brightness.dark : Brightness.light);
-
     return MaterialApp(
-      theme: themeData,
       home: Scaffold(
-        appBar: AppBar(title: const Text('Search Bar Sample')),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: SearchAnchor(
@@ -37,21 +27,6 @@ class _SearchBarAppState extends State<SearchBarApp> {
                 controller.openView();
               },
               leading: const Icon(Icons.search),
-              trailing: <Widget>[
-                Tooltip(
-                  message: 'Change brightness mode',
-                  child: IconButton(
-                    isSelected: isDark,
-                    onPressed: () {
-                      setState(() {
-                        isDark = !isDark;
-                      });
-                    },
-                    icon: const Icon(Icons.wb_sunny_outlined),
-                    selectedIcon: const Icon(Icons.brightness_2_outlined),
-                  ),
-                )
-              ],
             );
           }, suggestionsBuilder:
                   (BuildContext context, SearchController controller) {

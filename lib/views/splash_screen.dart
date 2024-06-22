@@ -16,16 +16,16 @@ class _SplashScreenState extends State<SplashScreen>
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIMode((SystemUiMode.immersive));
-    Future.delayed(const Duration(seconds: 3), () {
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (_) => const HomeFragment()));
+    Future.delayed(const Duration(seconds: 5), () {
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const HomeFragment()));
     });
   }
 
   @override
-  void dispose()  {
+  void dispose() {
     super.dispose();
-     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: SystemUiOverlay.values);
   }
 
@@ -41,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen>
               image: AssetImage("lib/assets/logo_app.png"),
               width: 500,
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             SpinKitFadingCircle(

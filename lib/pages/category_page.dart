@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopvippro_demo/views/Search_Bar.dart';
 
 class CategoryPage extends StatefulWidget {
   const CategoryPage({super.key});
@@ -10,11 +11,6 @@ class CategoryPage extends StatefulWidget {
 class _CategoryPageState extends State<CategoryPage> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: Text(
-        'Danh mục',
-        textAlign: TextAlign.center,
-      ),
-    );
+    return SearchBarApp();
   }
 }

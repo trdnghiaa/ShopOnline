@@ -28,6 +28,7 @@ class _HomePageState extends State<HomePage> {
 
   getData() async {
     product = await RemoteService().getProduct();
+    if (!mounted) return;
     if (product != null) {
       setState(() {
         isLoaded = true;
@@ -44,68 +45,74 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  void dispose() {
+    // If you have any ongoing API requests, cancel them here.
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: GridView.builder(
-        shrinkWrap: true,
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        itemCount: product?.length ?? 0,
-        itemBuilder: (BuildContext context, int index) {
-          return Card(
-              child: GestureDetector(
-            onTap: () => navigateToItemDetails(index),
-            child: Container(
-              height: 290,
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(20)),
-              margin: EdgeInsets.all(5),
-              padding: EdgeInsets.all(5),
-              child: Stack(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Expanded(
-                        child: Image.network(
-                          '${product?[index].image}',
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                      Text(
-                        overflow: TextOverflow.ellipsis,
-                        '${product?[index].title}',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            '\$ '+ '${product?[index].price}',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
+      child: isLoaded
+          ? GridView.builder(
+              shrinkWrap: true,
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              itemCount: product?.length ?? 0,
+              itemBuilder: (BuildContext context, int index) {
+                return Card(
+                    child: GestureDetector(
+                  onTap: () => navigateToItemDetails(index),
+                  child: Container(
+                    decoration:
+                        BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                    margin: EdgeInsets.all(5),
+                    padding: EdgeInsets.all(5),
+                    child: Stack(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Expanded(
+                              child: Image.network(
+                                '${product?[index].image}',
+                                fit: BoxFit.fill,
+                              ),
                             ),
-                          ),
-                        ],
-                      )
-                    ],
+                            Text(
+                              overflow: TextOverflow.ellipsis,
+                              '${product?[index].title}',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  '\$ ' + '${product?[index].price}',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ],
+                ));
+              },
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 1.0,
+                crossAxisSpacing: 5.0,
+                mainAxisSpacing: 10,
+                mainAxisExtent: 240,
               ),
-            ),
-          ));
-        },
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 1.0,
-          crossAxisSpacing: 5.0,
-          mainAxisSpacing: 10,
-          mainAxisExtent: 280,
-        ),
-      ),
+            )
+          : Center(child: CircularProgressIndicator()),
     );
   }
 }

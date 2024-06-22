@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shopvippro_demo/constants/text_strings.dart';
 import 'package:shopvippro_demo/themes/colors.dart';
 import 'package:shopvippro_demo/views/AddToCart_Button.dart';
 import 'package:shopvippro_demo/models/post.dart';
@@ -14,15 +15,14 @@ class ItemDetailsPage extends StatefulWidget {
 }
 
 class _ItemDetailsPageState extends State<ItemDetailsPage> {
-  
 //quantity
   int quantityCount = 0;
 //decrement Quantity
   void decrementQuantity() {
     setState(() {
       if (quantityCount > 0) {
-      quantityCount--;
-    }
+        quantityCount--;
+      }
     });
   }
 
@@ -40,7 +40,7 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Chi tiết sản phẩm'),
+        title: const Text(tItemDetails),
         backgroundColor: Colors.transparent,
         elevation: 0,
         foregroundColor: Colors.grey[900],
@@ -94,7 +94,7 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
                 ),
                 //description
                 Text(
-                  'Description',
+                  tDescription,
                   style: TextStyle(
                       color: Colors.grey[900],
                       fontWeight: FontWeight.bold,
