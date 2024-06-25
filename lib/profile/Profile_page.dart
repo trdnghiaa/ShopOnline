@@ -64,7 +64,7 @@ class ProfilePage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const UpdateProfilePage()),
+                            builder: (context) =>  UpdateProfilePage()),
                       );
                     },
                     style: ElevatedButton.styleFrom(

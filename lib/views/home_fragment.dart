@@ -68,18 +68,18 @@ class _HomeFragmentState extends State<HomeFragment> {
               NavigationDestination(
                 icon: Icon(
                   LineAwesomeIcons.home,
-                  size: 25,
+                  size: 22,
                 ),
                 label: tMenuBottom1,
               ),
               NavigationDestination(
-                  icon: Icon(LineAwesomeIcons.tasks, size: 25),
+                  icon: Icon(LineAwesomeIcons.tasks, size: 22),
                   label: tMenuBottom2),
               NavigationDestination(
-                  icon: Icon(LineAwesomeIcons.shopping_cart, size: 25),
+                  icon: Icon(LineAwesomeIcons.shopping_cart, size: 22),
                   label: tMenuBottom3),
               NavigationDestination(
-                  icon: Icon(LineAwesomeIcons.user, size: 25),
+                  icon: Icon(LineAwesomeIcons.user, size: 22),
                   label: tMenuBottom4),
             ],
             selectedIndex: _currentIndex,

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:modern_form_line_awesome_icons/modern_form_line_awesome_icons.dart';
 import 'package:shopvippro_demo/constants/text_strings.dart';
 import 'package:shopvippro_demo/themes/colors.dart';
 import 'package:shopvippro_demo/views/AddToCart_Button.dart';
-import 'package:shopvippro_demo/models/post.dart';
-import 'package:shopvippro_demo/services/remote_post.dart';
+import 'package:shopvippro_demo/models/product.dart';
+import 'package:shopvippro_demo/services/Remote_Product.dart';
 
 class ItemDetailsPage extends StatefulWidget {
   final Product product;
@@ -36,20 +37,21 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
   //add to cart
   void addToCart() {}
 
+  void addToFavorite() {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(tItemDetails),
         backgroundColor: Colors.transparent,
-        elevation: 0,
         foregroundColor: Colors.grey[900],
       ),
       body: Column(
         children: [
           //listview of item details
           Expanded(
-              child: Padding(
+            child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: ListView(
               children: [
@@ -60,29 +62,38 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
                   fit: BoxFit.fill,
                 ),
                 const SizedBox(
-                  height: 5,
+                  height: 10,
                 ),
                 //rate
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     //star icon
-                    Icon(
-                      Icons.star,
-                      color: Colors.yellow[800],
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.star,
+                          color: Colors.yellow[800],
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        //number
+                        Text(
+                          widget.product.rating.rate.toString(),
+                          style: TextStyle(
+                              color: Colors.grey[600],
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
                     ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    //number
-                    Text(
-                      widget.product.rating.rate.toString(),
-                      style: TextStyle(
-                          color: Colors.grey[600], fontWeight: FontWeight.bold),
+                    Container(
+                      child: IconButton(
+                        icon: const Icon(LineAwesomeIcons.heart_o),
+                        onPressed: addToFavorite,
+                      ),
                     )
                   ],
-                ),
-                const SizedBox(
-                  height: 10,
                 ),
                 //name item
                 Text(

@@ -5,7 +5,20 @@ import 'package:shopvippro_demo/profile/Profile_page.dart';
 import 'package:shopvippro_demo/themes/colors.dart';
 
 class UpdateProfilePage extends StatelessWidget {
-  const UpdateProfilePage({super.key});
+  UpdateProfilePage({super.key});
+
+  static Color _selectedColor = Colors.black;
+  static Color _unSelectedColor = Colors.grey;
+
+  Color _usernameColor = _unSelectedColor;
+  Color _passwordColor = _unSelectedColor;
+  Color _emailColor = _unSelectedColor;
+  Color _phoneColor = _unSelectedColor;
+
+  FocusNode _usernameTFFocusNode = FocusNode();
+  FocusNode _passwordTFFocusNode = FocusNode();
+  FocusNode _emailTFFocusNode = FocusNode();
+  FocusNode _phoneTFFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +31,7 @@ class UpdateProfilePage extends StatelessWidget {
         ),
         body: SingleChildScrollView(
             child: Container(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(22.0),
           child: Column(children: [
             Stack(children: [
               SizedBox(
@@ -50,36 +63,74 @@ class UpdateProfilePage extends StatelessWidget {
               height: 50,
             ),
             Form(
-                child: Column(
+              child: Column(
               children: [
-                TextFormField(
-                  decoration: InputDecoration(
-                      label: Text("Full Name"),
-                      prefixIcon: Icon(Icons.person_outline_rounded)),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 22),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: _usernameColor),
+                      borderRadius: BorderRadius.circular(8)),
+                  child: TextField(
+                    focusNode: _usernameTFFocusNode,
+                    decoration: InputDecoration(
+                        icon: Icon(LineAwesomeIcons.user),
+                        labelText: tUsername,
+                        labelStyle: TextStyle(color: Colors.black),
+                        border: InputBorder.none),
+                  ),
                 ),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: 12,
                 ),
-                TextFormField(
-                  decoration: InputDecoration(
-                      label: Text("Email"),
-                      prefixIcon: Icon(Icons.email_rounded)),
+                //Textfiled Password
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 22),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: _passwordColor),
+                      borderRadius: BorderRadius.circular(8)),
+                  child: TextField(
+                    focusNode: _passwordTFFocusNode,
+                    decoration: InputDecoration(
+                        icon: Icon(LineAwesomeIcons.key),
+                        labelText: tPassword,
+                        labelStyle: TextStyle(color: Colors.black),
+                        border: InputBorder.none),
+                  ),
                 ),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: 12,
                 ),
-                TextFormField(
-                  decoration: InputDecoration(
-                      label: Text("Phone"),
-                      prefixIcon: Icon(Icons.phone_iphone_rounded)),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 22),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: _emailColor),
+                      borderRadius: BorderRadius.circular(8)),
+                  child: TextField(
+                    focusNode: _emailTFFocusNode,
+                    decoration: InputDecoration(
+                        icon: Icon(LineAwesomeIcons.envelope),
+                        labelText: tEmail,
+                        labelStyle: TextStyle(color: Colors.black),
+                        border: InputBorder.none),
+                  ),
                 ),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: 12,
                 ),
-                TextFormField(
-                  decoration: InputDecoration(
-                      label: Text("Password"),
-                      prefixIcon: Icon(Icons.password_rounded)),
+                //Textfiled Password
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 22),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: _phoneColor),
+                      borderRadius: BorderRadius.circular(8)),
+                  child: TextField(
+                    focusNode: _phoneTFFocusNode,
+                    decoration: InputDecoration(
+                        icon: Icon(LineAwesomeIcons.phone),
+                        labelText: "Phone",
+                        labelStyle: TextStyle(color: Colors.black),
+                        border: InputBorder.none),
+                  ),
                 ),
               ],
             )),

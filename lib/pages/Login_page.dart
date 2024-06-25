@@ -1,140 +1,118 @@
+// lib/pages/login_page.dart
 import 'package:flutter/material.dart';
-import 'package:shopvippro_demo/profile/Profile_page.dart';
-import 'package:shopvippro_demo/views/CreateNewAccount_button.dart';
+import 'package:shopvippro_demo/constants/text_strings.dart';
+import 'package:shopvippro_demo/models/user.dart';
+import 'package:shopvippro_demo/pages/Register_page.dart';
+import 'package:shopvippro_demo/services/Authentication.dart';
+import 'package:shopvippro_demo/views/Register_button.dart';
+import 'package:shopvippro_demo/views/Home_Fragment.dart';
 import 'package:shopvippro_demo/views/Login_Button.dart';
-import 'Create.Newaccount_page.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
-
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final AuthService _authService = AuthService();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   static Color _selectedColor = Colors.black;
   static Color _unSelectedColor = Colors.grey;
 
-  Color _emailTFColor = _unSelectedColor;
+  Color _usernameColor = _unSelectedColor;
   Color _passwordColor = _unSelectedColor;
 
-  FocusNode _emailTFFocusNode = FocusNode();
+  FocusNode _usernameTFFocusNode = FocusNode();
   FocusNode _passwordTFFocusNode = FocusNode();
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _emailTFFocusNode.addListener(_onEmailTFFocusChange);
-    _passwordTFFocusNode.addListener(_onPasswordTFFocusChange);
-  }
+  bool _isLoading = false;
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    _emailTFFocusNode.removeListener(_onEmailTFFocusChange);
-    _emailTFFocusNode.dispose();
-    _passwordTFFocusNode.removeListener(_onPasswordTFFocusChange);
-    _passwordTFFocusNode.dispose();
-  }
-
-  void _onEmailTFFocusChange() {
+  void _login() async {
     setState(() {
-      _emailTFFocusNode.hasFocus
-          ? _emailTFColor = _selectedColor
-          : _emailTFColor = _unSelectedColor;
+      _isLoading = true;
     });
-  }
 
-  void _onPasswordTFFocusChange() {
+    String username = _usernameController.text;
+    String password = _passwordController.text;
+
+    bool success = await _authService.login(username, password);
+
     setState(() {
-      _passwordTFFocusNode.hasFocus
-          ? _passwordColor = _selectedColor
-          : _passwordColor = _unSelectedColor;
+      _isLoading = false;
     });
+
+    if (success) {
+      // Login successful
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomeFragment()),
+      );
+    } else {
+      // Login failed
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Đăng nhập thất bại')),
+      );
+    }
   }
 
-  void login() {
+  void _Register() {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => ProfilePage()));
-  }
-
-  void createAccount() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => NewAccCount()));
+      context,
+      MaterialPageRoute(builder: (context) => RegisterPage()),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        FocusManager.instance.primaryFocus?.unfocus();
-      },
-      child: Scaffold(
-        body: Padding(
-          padding: EdgeInsets.fromLTRB(20, 80, 20, 36),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                //image
-                Image(
-                  image: AssetImage("lib/assets/logo_app.png"),
-                  height: 200,
-                ),
-                //Textfield Username
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 22),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: _emailTFColor),
-                      borderRadius: BorderRadius.circular(8)),
-                  child: TextField(
-                    focusNode: _emailTFFocusNode,
-                    decoration: InputDecoration(
-                        labelText: "Username",
-                        labelStyle: TextStyle(color: _emailTFColor),
-                        border: InputBorder.none),
-                  ),
-                ),
-                SizedBox(
-                  height: 12,
-                ),
-                //Textfiled Password
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 22),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: _passwordColor),
-                      borderRadius: BorderRadius.circular(8)),
-                  child: TextField(
-                    focusNode: _passwordTFFocusNode,
-                    decoration: InputDecoration(
-                        labelText: "Password",
-                        labelStyle: TextStyle(color: _passwordColor),
-                        border: InputBorder.none),
-                  ),
-                ),
-                SizedBox(height: 20),
-                //Login
-                SizedBox(
-                  width: 100,
-                  child: LoginButton(text: "Login", onTap: login),
-                ),
-                Expanded(child: SizedBox.shrink()),
-                //Create new account
-                SizedBox(
-                  width: 200,
-                  child: CreateNewAccountButton(
-                      text: "Create New Account ?", onTap: createAccount),
-                ),
-              ],
+    return Scaffold(
+      body: Padding(
+        padding: EdgeInsets.fromLTRB(50, 30, 50, 0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              "lib/assets/logo_app.png",
+              height: 250,
             ),
-          ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 22),
+              decoration: BoxDecoration(
+                  border: Border.all(color: _usernameColor),
+                  borderRadius: BorderRadius.circular(8)),
+              child: TextField(
+                controller: _usernameController,
+                focusNode: _usernameTFFocusNode,
+                decoration: InputDecoration(
+                    labelText: tUsername, border: InputBorder.none),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 22),
+              decoration: BoxDecoration(
+                  border: Border.all(color: _passwordColor),
+                  borderRadius: BorderRadius.circular(8)),
+              child: TextField(
+                controller: _passwordController,
+                focusNode: _passwordTFFocusNode,
+                decoration: InputDecoration(
+                    labelText: tPassword, border: InputBorder.none),
+                obscureText: true,
+              ),
+            ),
+            SizedBox(height: 20),
+            _isLoading
+                ? CircularProgressIndicator()
+                : LoginButton(text: "Login", onTap: _login),
+            Expanded(child: SizedBox.shrink()),
+            RegisterButton(text: "Create New Account ?", onTap: _Register),
+          ],
         ),
       ),
     );
   }
 }
-
-// Navigator.push(context,
-//                         MaterialPageRoute(builder: (context) => NewAccCount()));

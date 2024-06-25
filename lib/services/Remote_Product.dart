@@ -1,4 +1,4 @@
-import 'package:shopvippro_demo/models/post.dart';
+import 'package:shopvippro_demo/models/product.dart';
 import 'package:http/http.dart' as http;
 
 class RemoteService {

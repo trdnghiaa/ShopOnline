@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shopvippro_demo/themes/colors.dart';
 
-class CreateNewAccountButton extends StatelessWidget {
+class RegisterButton extends StatelessWidget {
   final String text;
   final void Function()? onTap;
-  const CreateNewAccountButton(
+  const RegisterButton(
       {super.key, required this.text, required this.onTap});
 
   @override

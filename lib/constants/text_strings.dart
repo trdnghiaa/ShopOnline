@@ -11,7 +11,7 @@ const String tMenuBottom4 = "Me";
 const String tItemDetails = "Details";
 const String tDescription = "Description";
 
-//Profile Page - Text
+//Profile Page 
 const String tProfile = "Profile";
 const String tEmail = "Email";
 const String tUsername = "Username";
@@ -21,5 +21,7 @@ const String tMenuProfile2 = "Favorite";
 const String tMenuProfile3 = "Information";
 const String tMenuProfile4 = "Log out";
 
-//Update Profile Page - Text
+//Update Profile Page
 const String tEditProfile = "Edit Profile";
+
+//Login Page
