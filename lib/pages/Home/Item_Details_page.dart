@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:modern_form_line_awesome_icons/modern_form_line_awesome_icons.dart';
+import 'package:provider/provider.dart';
 import 'package:shopvippro_demo/constants/text_strings.dart';
-import 'package:shopvippro_demo/themes/colors.dart';
+import 'package:shopvippro_demo/constants/colors.dart';
+import 'package:shopvippro_demo/services/AuthServiceProvider.dart';
 import 'package:shopvippro_demo/views/AddToCart_Button.dart';
 import 'package:shopvippro_demo/models/product.dart';
-import 'package:shopvippro_demo/services/Remote_Product.dart';
+import 'package:shopvippro_demo/widgets/favorites.dart';
 
 class ItemDetailsPage extends StatefulWidget {
   final Product product;
@@ -37,22 +39,71 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
   //add to cart
   void addToCart() {}
 
-  void addToFavorite() {}
+  void addToFavorite() {
+  final authProvider = context.read<AuthServiceProvider>();
+  final favoritesProvider = context.read<FavoritesProvider>();
+
+  if (authProvider.isLoggedIn) {
+    if (favoritesProvider.isFavorite(widget.product)) {
+      favoritesProvider.removeFavorite(widget.product);
+    } else {
+      favoritesProvider.addFavorite(widget.product);
+    }
+  } else {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: Text('Please log in to use'),
+        content: Text('You need to be logged in to perform this action.'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text('Close'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/login');
+            },
+            child: Text('Login'),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = context.watch<AuthServiceProvider>();
+    final favoritesProvider = context.watch<FavoritesProvider>();
+    final isFavorite =
+        context.watch<FavoritesProvider>().isFavorite(widget.product);
     return Scaffold(
       appBar: AppBar(
-        title: const Text(tItemDetails, style: TextStyle(color: Colors.white),),
+        title: const Text(
+          tItemDetails,
+          style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 25, color: Colors.white),
+        ),
+        centerTitle: true,
+        toolbarHeight: 60.2,
+        // toolbarOpacity: 0.8,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+              bottomRight: Radius.circular(50),
+              bottomLeft: Radius.circular(50)),
+        ),
+        elevation: 0.00,
         backgroundColor: colorApp,
       ),
       body: Column(
         children: [
           //listview of item details
           Expanded(
-            child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: ListView(
+              padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
               children: [
                 //image
                 Image.network(
@@ -88,7 +139,12 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
                     ),
                     Container(
                       child: IconButton(
-                        icon: const Icon(LineAwesomeIcons.heart_o),
+                        icon: Icon(
+                          isFavorite
+                              ? LineAwesomeIcons.heart
+                              : LineAwesomeIcons.heart_o,
+                          color: isFavorite ? Colors.red : Colors.grey,
+                        ),
                         onPressed: addToFavorite,
                       ),
                     )

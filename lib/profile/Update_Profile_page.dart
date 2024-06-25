@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:modern_form_line_awesome_icons/modern_form_line_awesome_icons.dart';
+import 'package:shopvippro_demo/constants/colors.dart';
 import 'package:shopvippro_demo/constants/text_strings.dart';
 import 'package:shopvippro_demo/profile/Profile_page.dart';
-import 'package:shopvippro_demo/themes/colors.dart';
+
 
 class UpdateProfilePage extends StatelessWidget {
   UpdateProfilePage({super.key});
@@ -63,7 +64,7 @@ class UpdateProfilePage extends StatelessWidget {
               height: 50,
             ),
             Form(
-              child: Column(
+                child: Column(
               children: [
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 22),

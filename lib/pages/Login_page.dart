@@ -10,6 +10,10 @@ import 'package:shopvippro_demo/views/Home_Fragment.dart';
 import 'package:shopvippro_demo/views/Login_Button.dart';
 
 class LoginPage extends StatefulWidget {
+  final VoidCallback onLoginSuccess;
+
+  LoginPage({required this.onLoginSuccess});
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -46,10 +50,7 @@ class _LoginPageState extends State<LoginPage> {
 
     if (success) {
       // Login successful
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => ProfilePage()),
-      );
+      widget.onLoginSuccess();
     } else {
       // Login failed
       ScaffoldMessenger.of(context).showSnackBar(

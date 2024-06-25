@@ -10,11 +10,6 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: Text(
-        'Giỏ hàng',
-        textAlign: TextAlign.center,
-      ),
-    );
+    return Placeholder();
   }
 }

@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:modern_form_line_awesome_icons/modern_form_line_awesome_icons.dart';
 
 import 'package:shopvippro_demo/constants/text_strings.dart';
-import 'package:shopvippro_demo/pages/Home_page.dart';
+import 'package:shopvippro_demo/pages/Home/Home_page.dart';
 import 'package:shopvippro_demo/pages/Category_page.dart';
 import 'package:shopvippro_demo/pages/Cart_page.dart';
 import 'package:shopvippro_demo/pages/Login_page.dart';
-import 'package:shopvippro_demo/themes/colors.dart';
+import 'package:shopvippro_demo/constants/colors.dart';
+import 'package:shopvippro_demo/profile/Profile_page.dart';
 
 class HomeFragment extends StatefulWidget {
   const HomeFragment({super.key});
@@ -17,42 +18,49 @@ class HomeFragment extends StatefulWidget {
 
 class _HomeFragmentState extends State<HomeFragment> {
   int _currentIndex = 0;
-  List<Widget> body = const [
-    Icon(Icons.home),
-    Icon(Icons.category),
-    Icon(Icons.shopping_cart),
-    Icon(Icons.person)
-  ];
+
+  List<Widget> pages = [];
+
+  void initState() {
+    super.initState();
+    pages = [
+      HomePage(),
+      CategoryPage(),
+      CartPage(),
+      LoginPage(
+        onLoginSuccess: () {
+          setState(() {
+            pages[3] = ProfilePage(); // Thay thế LoginPage bằng ProfilePage
+            _currentIndex =
+                3; // Chuyển đến ProfilePage sau khi đăng nhập thành công
+          });
+        },
+      ),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text(tNameApp,
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 10,
-                color: Colors.white,
-              )),
-          shadowColor: Colors.black,
-          bottom: PreferredSize(
-              preferredSize: const Size.fromHeight(1.0),
-              child: Container(
-                color: Colors.black,
-                height: 0.5,
-              )),
+          title: const Text(
+            tNameApp,
+            style: TextStyle(letterSpacing: 10, fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),
+          ),
           centerTitle: true,
+          toolbarHeight: 60.2,
+          // toolbarOpacity: 0.8,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                bottomRight: Radius.circular(50),
+                bottomLeft: Radius.circular(50)),
+          ),
+          elevation: 0.00,
           backgroundColor: colorApp,
         ),
         body: SizedBox(
           child: Center(
-            child: [
-              HomePage(),
-              CategoryPage(),
-              CartPage(),
-              LoginPage()
-            ][_currentIndex],
+            child: pages[_currentIndex],
           ),
         ),
         bottomNavigationBar: NavigationBarTheme(

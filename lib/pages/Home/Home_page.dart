@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:shopvippro_demo/constants/text_strings.dart';
 import 'package:shopvippro_demo/models/product.dart';
-import 'package:shopvippro_demo/pages/Item_Details_page.dart';
+import 'package:shopvippro_demo/pages/Home/Item_Details_page.dart';
 import 'package:shopvippro_demo/services/Remote_Product.dart';
 import 'package:shopvippro_demo/views/Search_Bar.dart';
 
@@ -23,7 +23,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    //fetch data from API
     getData();
   }
 
@@ -54,23 +53,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text(tNewArrivals,
-              style: TextStyle(
-                fontFamily: "Roboto",
-                fontSize: 25,
-                fontWeight: FontWeight.w600,
-                color: Colors.black,
-              )),
-          elevation: 2,
-          backgroundColor: Colors.white,
-          centerTitle: true,
-        ),
         body: Center(
           child: isLoaded
               ? GridView.builder(
                   shrinkWrap: true,
-                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
+                  padding: const EdgeInsets.fromLTRB(15, 10, 15, 20),
                   itemCount: product?.length ?? 0,
                   itemBuilder: (BuildContext context, int index) {
                     return Card(
@@ -88,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 Expanded(
                                   child: Image.network(
-                                    '${product?[index].image}',
+                                    product?[index].image ?? '',
                                     fit: BoxFit.fill,
                                   ),
                                 ),
@@ -97,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 Text(
                                   overflow: TextOverflow.ellipsis,
-                                  '${product?[index].title}',
+                                  product?[index].title ?? '',
                                   style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
@@ -106,7 +93,7 @@ class _HomePageState extends State<HomePage> {
                                 Row(
                                   children: [
                                     Text(
-                                      '\$ ' + '${product?[index].price}',
+                                      '\$ ${product?[index].price ?? ''}',
                                       style: TextStyle(
                                         fontWeight: FontWeight.w500,
                                         fontSize: 15,
@@ -129,7 +116,7 @@ class _HomePageState extends State<HomePage> {
                     mainAxisExtent: 240,
                   ),
                 )
-              : Center(child: CircularProgressIndicator()),
+              : CircularProgressIndicator(),
         ));
   }
 }

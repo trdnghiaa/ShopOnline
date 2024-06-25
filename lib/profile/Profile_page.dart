@@ -3,9 +3,10 @@ import 'package:modern_form_line_awesome_icons/modern_form_line_awesome_icons.da
 
 import 'package:shopvippro_demo/Profile/Update_Profile_page.dart';
 import 'package:shopvippro_demo/constants/text_strings.dart';
+import 'package:shopvippro_demo/pages/Favorites_page.dart';
 import 'package:shopvippro_demo/pages/Login_page.dart';
-import 'package:shopvippro_demo/profile/menu_profile_widget.dart';
-import 'package:shopvippro_demo/themes/colors.dart';
+import 'package:shopvippro_demo/widgets/menu_profile_widget.dart';
+import 'package:shopvippro_demo/constants/colors.dart';
 import 'package:shopvippro_demo/views/Home_Fragment.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -14,12 +15,9 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(tProfile),
-      ),
       body: SingleChildScrollView(
         child: Container(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.fromLTRB(10, 50, 10, 20),
           child: Column(
             children: [
               Stack(
@@ -91,8 +89,15 @@ class ProfilePage extends StatelessWidget {
               ),
               ProfileMenuWidget(
                 title: tMenuProfile2,
-                icon: LineAwesomeIcons.credit_card,
-                onTap: () {},
+                icon: LineAwesomeIcons.heart_o,
+                onTap: () {
+                  Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => FavoritesPage(),
+      ),
+    );
+                },
               ),
               const Divider(
                 color: Colors.grey,

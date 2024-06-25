@@ -2,10 +2,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shopvippro_demo/models/user.dart';
-
+// 10.21.16.208
 
 class AuthService {
-  final String baseUrl = 'http://10.21.16.208:3000/api/auth';
+  final String baseUrl = 'http://192.168.1.214:3000/api/auth';
 
   // Đăng ký người dùng
   Future<bool> register(User user) async {
