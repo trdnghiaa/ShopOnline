@@ -33,7 +33,7 @@ class _HomeFragmentState extends State<HomeFragment> {
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 10,
-                color: Colors.black,
+                color: Colors.white,
               )),
           shadowColor: Colors.black,
           bottom: PreferredSize(
@@ -43,7 +43,7 @@ class _HomeFragmentState extends State<HomeFragment> {
                 height: 0.5,
               )),
           centerTitle: true,
-          backgroundColor: Colors.white,
+          backgroundColor: colorApp,
         ),
         body: SizedBox(
           child: Center(
@@ -59,8 +59,8 @@ class _HomeFragmentState extends State<HomeFragment> {
           data: NavigationBarThemeData(
               labelTextStyle: MaterialStateProperty.all(
             const TextStyle(
-              fontSize: 17,
-              color: Colors.black,
+              fontSize: 15,
+              color: Colors.white,
             ),
           )),
           child: NavigationBar(
@@ -68,19 +68,20 @@ class _HomeFragmentState extends State<HomeFragment> {
               NavigationDestination(
                 icon: Icon(
                   LineAwesomeIcons.home,
-                  size: 22,
                 ),
                 label: tMenuBottom1,
               ),
               NavigationDestination(
-                  icon: Icon(LineAwesomeIcons.tasks, size: 22),
-                  label: tMenuBottom2),
+                icon: Icon(LineAwesomeIcons.tasks),
+                label: tMenuBottom2,
+              ),
               NavigationDestination(
-                  icon: Icon(LineAwesomeIcons.shopping_cart, size: 22),
+                  icon: Icon(LineAwesomeIcons.shopping_cart),
                   label: tMenuBottom3),
               NavigationDestination(
-                  icon: Icon(LineAwesomeIcons.user, size: 22),
-                  label: tMenuBottom4),
+                icon: Icon(LineAwesomeIcons.user),
+                label: tMenuBottom4,
+              ),
             ],
             selectedIndex: _currentIndex,
             onDestinationSelected: (int index) {
@@ -89,7 +90,8 @@ class _HomeFragmentState extends State<HomeFragment> {
               });
             },
             labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-            indicatorColor: indicatorBottom,
+            indicatorColor: Colors.white,
+            backgroundColor: colorApp,
           ),
         ));
   }

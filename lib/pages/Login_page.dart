@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shopvippro_demo/constants/text_strings.dart';
 import 'package:shopvippro_demo/models/user.dart';
 import 'package:shopvippro_demo/pages/Register_page.dart';
+import 'package:shopvippro_demo/profile/Profile_page.dart';
 import 'package:shopvippro_demo/services/Authentication.dart';
 import 'package:shopvippro_demo/views/Register_button.dart';
 import 'package:shopvippro_demo/views/Home_Fragment.dart';
@@ -47,17 +48,19 @@ class _LoginPageState extends State<LoginPage> {
       // Login successful
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomeFragment()),
+        MaterialPageRoute(builder: (context) => ProfilePage()),
       );
     } else {
       // Login failed
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Đăng nhập thất bại')),
+        SnackBar(
+            content: Text(
+                'Failed to Login, Please check username or password again !')),
       );
     }
   }
 
-  void _Register() {
+  void _register() {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => RegisterPage()),
@@ -104,12 +107,13 @@ class _LoginPageState extends State<LoginPage> {
                 obscureText: true,
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             _isLoading
                 ? CircularProgressIndicator()
                 : LoginButton(text: "Login", onTap: _login),
             Expanded(child: SizedBox.shrink()),
-            RegisterButton(text: "Create New Account ?", onTap: _Register),
+            RegisterButton(text: "Create New Account ?", onTap: _register),
+            SizedBox(height: 20),
           ],
         ),
       ),

@@ -12,6 +12,7 @@ class RegisterButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        width: 200,
         decoration: BoxDecoration(
           color: createAccount,
           borderRadius: BorderRadius.circular(40),

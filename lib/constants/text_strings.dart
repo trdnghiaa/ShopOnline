@@ -25,3 +25,10 @@ const String tMenuProfile4 = "Log out";
 const String tEditProfile = "Edit Profile";
 
 //Login Page
+
+//Register Page
+const String tCreateNewAccount = "Create New Account";
+const String tPhoneNum = "Phone Number";
+
+//Home Page
+const String tNewArrivals = "New Arrivals";

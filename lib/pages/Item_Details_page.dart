@@ -43,9 +43,8 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(tItemDetails),
-        backgroundColor: Colors.transparent,
-        foregroundColor: Colors.grey[900],
+        title: const Text(tItemDetails, style: TextStyle(color: Colors.white),),
+        backgroundColor: colorApp,
       ),
       body: Column(
         children: [
@@ -124,8 +123,8 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
             ),
           )),
           Container(
-            color: itemContainer,
-            padding: const EdgeInsets.fromLTRB(20, 15, 20, 10),
+            color: colorApp,
+            padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
             child: Column(
               children: [
                 //price + quantity

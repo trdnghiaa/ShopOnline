@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:shopvippro_demo/constants/text_strings.dart';
 import 'package:shopvippro_demo/models/product.dart';
 import 'package:shopvippro_demo/pages/Item_Details_page.dart';
 import 'package:shopvippro_demo/services/Remote_Product.dart';
@@ -54,12 +55,15 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("New Arrivals",
+          title: const Text(tNewArrivals,
               style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+                fontFamily: "Roboto",
+                fontSize: 25,
+                fontWeight: FontWeight.w600,
                 color: Colors.black,
               )),
+          elevation: 2,
+          backgroundColor: Colors.white,
           centerTitle: true,
         ),
         body: Center(
@@ -75,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                       child: Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20)),
-                        margin: EdgeInsets.all(5),
+                        margin: EdgeInsets.all(10),
                         padding: EdgeInsets.all(5),
                         child: Stack(
                           children: [
@@ -88,11 +92,14 @@ class _HomePageState extends State<HomePage> {
                                     fit: BoxFit.fill,
                                   ),
                                 ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
                                 Text(
                                   overflow: TextOverflow.ellipsis,
                                   '${product?[index].title}',
                                   style: TextStyle(
-                                    fontSize: 20,
+                                    fontSize: 15,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -101,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                                     Text(
                                       '\$ ' + '${product?[index].price}',
                                       style: TextStyle(
-                                        fontWeight: FontWeight.bold,
+                                        fontWeight: FontWeight.w500,
                                         fontSize: 15,
                                       ),
                                     ),

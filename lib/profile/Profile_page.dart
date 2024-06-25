@@ -4,7 +4,7 @@ import 'package:modern_form_line_awesome_icons/modern_form_line_awesome_icons.da
 import 'package:shopvippro_demo/Profile/Update_Profile_page.dart';
 import 'package:shopvippro_demo/constants/text_strings.dart';
 import 'package:shopvippro_demo/pages/Login_page.dart';
-import 'package:shopvippro_demo/profile/widget/menu_profile_widget.dart';
+import 'package:shopvippro_demo/profile/menu_profile_widget.dart';
 import 'package:shopvippro_demo/themes/colors.dart';
 import 'package:shopvippro_demo/views/Home_Fragment.dart';
 
@@ -64,7 +64,7 @@ class ProfilePage extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>  UpdateProfilePage()),
+                            builder: (context) => UpdateProfilePage()),
                       );
                     },
                     style: ElevatedButton.styleFrom(
@@ -110,7 +110,14 @@ class ProfilePage extends StatelessWidget {
                 icon: LineAwesomeIcons.sign_out,
                 textColor: Colors.red,
                 endIcon: false,
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomeFragment(),
+                    ),
+                  );
+                },
               ),
             ],
           ),

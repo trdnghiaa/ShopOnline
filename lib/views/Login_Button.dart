@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopvippro_demo/themes/colors.dart';
 
 class LoginButton extends StatelessWidget {
   final String text;
@@ -12,7 +13,7 @@ class LoginButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.deepPurpleAccent,
+          color: createAccount,
           borderRadius: BorderRadius.circular(40),
         ),
         padding: EdgeInsets.all(15),
