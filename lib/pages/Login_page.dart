@@ -1,5 +1,5 @@
-// lib/pages/login_page.dart
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shopvippro_demo/constants/text_strings.dart';
 import 'package:shopvippro_demo/models/user.dart';
 import 'package:shopvippro_demo/pages/Register_page.dart';
@@ -8,6 +8,7 @@ import 'package:shopvippro_demo/services/Authentication.dart';
 import 'package:shopvippro_demo/views/Register_button.dart';
 import 'package:shopvippro_demo/views/Home_Fragment.dart';
 import 'package:shopvippro_demo/views/Login_Button.dart';
+import 'package:shopvippro_demo/widgets/login_provider.dart';
 
 class LoginPage extends StatefulWidget {
   final VoidCallback onLoginSuccess;
@@ -19,7 +20,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final AuthService _authService = AuthService();
+  final AuthService authService = AuthService();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -42,15 +43,16 @@ class _LoginPageState extends State<LoginPage> {
     String username = _usernameController.text;
     String password = _passwordController.text;
 
-    bool success = await _authService.login(username, password);
+    bool success = await authService.login(username, password);
 
     setState(() {
       _isLoading = false;
     });
 
     if (success) {
-      // Login successful
+      context.read<LoginProvider>().login();
       widget.onLoginSuccess();
+      
     } else {
       // Login failed
       ScaffoldMessenger.of(context).showSnackBar(

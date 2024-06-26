@@ -54,69 +54,69 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
-          child: isLoaded
-              ? GridView.builder(
-                  shrinkWrap: true,
-                  padding: const EdgeInsets.fromLTRB(15, 10, 15, 20),
-                  itemCount: product?.length ?? 0,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Card(
-                        child: GestureDetector(
-                      onTap: () => navigateToItemDetails(index),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20)),
-                        margin: EdgeInsets.all(10),
-                        padding: EdgeInsets.all(5),
-                        child: Stack(
+      child: isLoaded
+          ? GridView.builder(
+              shrinkWrap: true,
+              padding: const EdgeInsets.fromLTRB(15, 10, 15, 20),
+              itemCount: product?.length ?? 0,
+              itemBuilder: (BuildContext context, int index) {
+                return Card(
+                    child: GestureDetector(
+                  onTap: () => navigateToItemDetails(index),
+                  child: Container(
+                    decoration:
+                        BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                    margin: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(5),
+                    child: Stack(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Expanded(
-                                  child: Image.network(
-                                    product?[index].image ?? '',
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  overflow: TextOverflow.ellipsis,
-                                  product?[index].title ?? '',
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      '\$ ${product?[index].price ?? ''}',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 15,
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              ],
+                            Expanded(
+                              child: Image.network(
+                                product?[index].image ?? '',
+                                fit: BoxFit.fill,
+                              ),
                             ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              overflow: TextOverflow.ellipsis,
+                              product?[index].title ?? '',
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  '\$ ${product?[index].price ?? ''}',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ],
+                            )
                           ],
                         ),
-                      ),
-                    ));
-                  },
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 1.0,
-                    crossAxisSpacing: 7.0,
-                    mainAxisSpacing: 12,
-                    mainAxisExtent: 240,
+                      ],
+                    ),
                   ),
-                )
-              : CircularProgressIndicator(),
-        ));
+                ));
+              },
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 1.0,
+                crossAxisSpacing: 7.0,
+                mainAxisSpacing: 12,
+                mainAxisExtent: 240,
+              ),
+            )
+          : CircularProgressIndicator(),
+    ));
   }
 }

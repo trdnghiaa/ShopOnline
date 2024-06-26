@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:shopvippro_demo/pages/Login_page.dart';
+import 'package:shopvippro_demo/pages/login_page.dart';
 import 'package:shopvippro_demo/pages/Register_page.dart';
-import 'package:shopvippro_demo/services/AuthServiceProvider.dart';
-import 'package:shopvippro_demo/views/Splash_page.dart';
+import 'package:shopvippro_demo/views/splash_page.dart';
 import 'package:shopvippro_demo/views/home_fragment.dart';
-import 'package:shopvippro_demo/widgets/favorites.dart';
+import 'package:shopvippro_demo/widgets/favorites_provider.dart';
+import 'package:shopvippro_demo/widgets/login_provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,11 +18,11 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<FavoritesProvider>(
-          create: (_) =>
+          create: (context) =>
               FavoritesProvider(), // Khởi tạo FavoritesProvider ở đây
         ),
-        ChangeNotifierProvider<AuthServiceProvider>(
-          create: (_) => AuthServiceProvider(), // Khởi tạo AuthProvider ở đây
+        ChangeNotifierProvider<LoginProvider>(
+          create: (context) => LoginProvider(), // Khởi tạo AuthProvider ở đây
         ),
         // Các provider khác nếu cần thiết có thể được thêm vào đây
       ],
@@ -31,7 +31,6 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             textTheme: GoogleFonts.nunitoSansTextTheme(),
           ),
-          home: const SplashPage(),
           initialRoute: '/splash', // Định nghĩa route khởi đầu
           routes: {
             '/splash': (context) => SplashPage(), // Route cho trang Splash

@@ -3,13 +3,14 @@ import 'package:modern_form_line_awesome_icons/modern_form_line_awesome_icons.da
 import 'package:provider/provider.dart';
 import 'package:shopvippro_demo/constants/colors.dart';
 import 'package:shopvippro_demo/constants/text_strings.dart';
-import 'package:shopvippro_demo/pages/Home/Item_Details_page.dart';
-import 'package:shopvippro_demo/widgets/favorites.dart';
+import 'package:shopvippro_demo/pages/home/Item_Details_page.dart';
+import 'package:shopvippro_demo/widgets/favorites_provider.dart';
 
 class FavoritesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final favorites = context.watch<FavoritesProvider>().favorites;
+    final favoritesProvider = Provider.of<FavoritesProvider>(context);
+    final favorites = favoritesProvider.favorites;
 
     return Scaffold(
       appBar: AppBar(

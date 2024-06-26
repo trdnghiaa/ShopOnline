@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AuthServiceProvider extends ChangeNotifier {
+class LoginProvider extends ChangeNotifier {
   bool _isLoggedIn = false;
 
   bool get isLoggedIn => _isLoggedIn;

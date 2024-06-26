@@ -1,4 +1,3 @@
-// lib/pages/register_page.dart
 import 'package:flutter/material.dart';
 import 'package:modern_form_line_awesome_icons/modern_form_line_awesome_icons.dart';
 import 'package:shopvippro_demo/constants/text_strings.dart';

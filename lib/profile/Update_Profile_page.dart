@@ -40,8 +40,7 @@ class UpdateProfilePage extends StatelessWidget {
                   height: 120,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(100),
-                    child: Image.network(
-                        'https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-1/312306876_1456430858100790_1814465686343165423_n.jpg?stp=cp6_dst-jpg_p200x200&_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=mD--9SZcuIsQ7kNvgGYCG3P&_nc_ht=scontent.fsgn2-7.fna&oh=00_AYDoVDeth155n6fI-A0uXYOhFChWIT0PjDIqiDhoTk_Ixg&oe=667B3CC8'),
+                    child: Image.asset("lib/assets/avatar.png")
                   )),
               Positioned(
                   bottom: 0,

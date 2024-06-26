@@ -4,10 +4,11 @@ import 'package:modern_form_line_awesome_icons/modern_form_line_awesome_icons.da
 import 'package:provider/provider.dart';
 import 'package:shopvippro_demo/constants/text_strings.dart';
 import 'package:shopvippro_demo/constants/colors.dart';
-import 'package:shopvippro_demo/services/AuthServiceProvider.dart';
+import 'package:shopvippro_demo/pages/Favorites_page.dart';
 import 'package:shopvippro_demo/views/AddToCart_Button.dart';
 import 'package:shopvippro_demo/models/product.dart';
-import 'package:shopvippro_demo/widgets/favorites.dart';
+import 'package:shopvippro_demo/widgets/favorites_provider.dart';
+import 'package:shopvippro_demo/widgets/login_provider.dart';
 
 class ItemDetailsPage extends StatefulWidget {
   final Product product;
@@ -40,44 +41,44 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
   void addToCart() {}
 
   void addToFavorite() {
-  final authProvider = context.read<AuthServiceProvider>();
-  final favoritesProvider = context.read<FavoritesProvider>();
+    final authProvider = context.read<LoginProvider>();
+    final favoritesProvider = context.read<FavoritesProvider>();
 
-  if (authProvider.isLoggedIn) {
-    if (favoritesProvider.isFavorite(widget.product)) {
-      favoritesProvider.removeFavorite(widget.product);
+    print('User is logged in: ${authProvider.isLoggedIn}');
+
+    if (authProvider.isLoggedIn) {
+      if (favoritesProvider.isFavorite(widget.product)) {
+        favoritesProvider.removeFavorite(widget.product);
+      } else {
+        favoritesProvider.addFavorite(widget.product);
+      }
     } else {
-      favoritesProvider.addFavorite(widget.product);
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: Text('Please log in to use'),
+          content: Text('You need to be logged in to perform this action.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Close'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/login');
+              },
+              child: Text('Login'),
+            ),
+          ],
+        ),
+      );
     }
-  } else {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: Text('Please log in to use'),
-        content: Text('You need to be logged in to perform this action.'),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('Close'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/login');
-            },
-            child: Text('Login'),
-          ),
-        ],
-      ),
-    );
   }
-}
 
   @override
   Widget build(BuildContext context) {
-    final authProvider = context.watch<AuthServiceProvider>();
-    final favoritesProvider = context.watch<FavoritesProvider>();
-    final isFavorite =
-        context.watch<FavoritesProvider>().isFavorite(widget.product);
+    final isFavorite = context.watch<FavoritesProvider>().isFavorite(widget.product);
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text(
