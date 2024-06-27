@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:shopvippro_demo/constants/text_strings.dart';
-import 'package:shopvippro_demo/themes/colors.dart';
-import 'package:shopvippro_demo/views/AddToCart_Button.dart';
+import 'package:provider/provider.dart';
+import 'package:shopvippro_demo/profile/widget/cart_provider.dart';
 import 'package:shopvippro_demo/models/post.dart';
-import 'package:shopvippro_demo/services/remote_post.dart';
+import 'package:shopvippro_demo/constants/text_strings.dart';
+import 'package:shopvippro_demo/profile/widget/login_provider.dart';
+import 'package:shopvippro_demo/views/AddToCart_Button.dart'; // Đảm bảo import đúng đường dẫn tới file post.dart
 
 class ItemDetailsPage extends StatefulWidget {
   final Product product;
@@ -32,16 +32,40 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
     });
   }
 
-  //add to cart
-  void addToCart() {}
+  void addToCart() {
+    final authProvider = context.read<LoginProvider>();
+    final cart = Provider.of<CartProvider>(context, listen: false);
+    print('User is logged in: ${authProvider.isLoggedIn}');
+     if (authProvider.isLoggedIn) {
+        cart.addItem(widget.product);
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: Text('Please log in to use'),
+          content: Text('You need to be logged in to perform this action.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Close'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/login');
+              },
+              child: Text('Login'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    final isFavorite = context.watch<FavoritesProvider>().isFavorite(widget.product);
-    
     return Scaffold(
       appBar: AppBar(
-        title: const Text(tItemDetails),
+        title: Text('Detail of ${widget.product.title}'),
         backgroundColor: Colors.transparent,
         elevation: 0,
         foregroundColor: Colors.grey[900],
@@ -49,71 +73,50 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
       body: Column(
         children: [
           Expanded(
-              child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: ListView(
-              children: [
-                //image
-                Image.network(
-                  widget.product.image,
-                  height: 350,
-                  fit: BoxFit.fill,
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                //rate
-                Row(
-                  children: [
-                    //star icon
-                    Icon(
-                      Icons.star,
-                      color: Colors.yellow[800],
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    //number
-                    Text(
-                      widget.product.rating.rate.toString(),
-                      style: TextStyle(
-                          color: Colors.grey[600], fontWeight: FontWeight.bold),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                //name item
-                Text(
-                  widget.product.title,
-                  style: GoogleFonts.dmSerifDisplay(fontSize: 28),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                //description
-                Text(
-                  tDescription,
-                  style: TextStyle(
-                      color: Colors.grey[900],
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  widget.product.description,
-                  style: TextStyle(
-                      color: Colors.grey[600], fontSize: 14, height: 2),
-                ),
-                // const SizedBox(height: 20,)
-              ],
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: ListView(
+                children: [
+                  Image.network(
+                    widget.product.image,
+                    height: 350,
+                    fit: BoxFit.fill,
+                  ),
+                  const SizedBox(height: 5),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.star,
+                        color: Colors.yellow[800],
+                      ),
+                      const SizedBox(width: 5),
+                      Text(
+                        widget.product.rating.rate.toString(),
+                        style: TextStyle(color: Colors.grey[600], fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    widget.product.title,
+                    style: TextStyle(fontSize: 28),
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    'Description:',
+                    style: TextStyle(color: Colors.grey[900], fontWeight: FontWeight.bold, fontSize: 18),
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    widget.product.description,
+                    style: TextStyle(color: Colors.grey[600], fontSize: 14, height: 2),
+                  ),
+                ],
+              ),
             ),
           ),
           Container(
-            color: itemContainer,
+            color: Colors.black54,
             padding: const EdgeInsets.fromLTRB(20, 15, 20, 10),
             child: Column(
               children: [

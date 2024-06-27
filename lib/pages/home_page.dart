@@ -2,10 +2,9 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:shopvippro_demo/constants/text_strings.dart';
-import 'package:shopvippro_demo/models/product.dart';
-import 'package:shopvippro_demo/pages/Home/Item_Details_page.dart';
-import 'package:shopvippro_demo/services/Remote_Product.dart';
+import 'package:shopvippro_demo/models/post.dart';
+import 'package:shopvippro_demo/pages/Item_Details_page.dart';
+import 'package:shopvippro_demo/services/remote_post.dart';
 import 'package:shopvippro_demo/views/Search_Bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,6 +22,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    //fetch data from API
     getData();
   }
 
@@ -52,12 +52,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Center(
+    return Center(
       child: isLoaded
           ? GridView.builder(
               shrinkWrap: true,
-              padding: const EdgeInsets.fromLTRB(15, 10, 15, 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               itemCount: product?.length ?? 0,
               itemBuilder: (BuildContext context, int index) {
                 return Card(
@@ -66,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                   child: Container(
                     decoration:
                         BoxDecoration(borderRadius: BorderRadius.circular(20)),
-                    margin: EdgeInsets.all(10),
+                    margin: EdgeInsets.all(5),
                     padding: EdgeInsets.all(5),
                     child: Stack(
                       children: [
@@ -75,27 +74,24 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Expanded(
                               child: Image.network(
-                                product?[index].image ?? '',
+                                '${product?[index].image}',
                                 fit: BoxFit.fill,
                               ),
                             ),
-                            const SizedBox(
-                              height: 10,
-                            ),
                             Text(
                               overflow: TextOverflow.ellipsis,
-                              product?[index].title ?? '',
+                              '${product?[index].title}',
                               style: TextStyle(
-                                fontSize: 15,
+                                fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             Row(
                               children: [
                                 Text(
-                                  '\$ ${product?[index].price ?? ''}',
+                                  '\$ ' + '${product?[index].price}',
                                   style: TextStyle(
-                                    fontWeight: FontWeight.w500,
+                                    fontWeight: FontWeight.bold,
                                     fontSize: 15,
                                   ),
                                 ),
@@ -111,12 +107,12 @@ class _HomePageState extends State<HomePage> {
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: 1.0,
-                crossAxisSpacing: 7.0,
-                mainAxisSpacing: 12,
+                crossAxisSpacing: 5.0,
+                mainAxisSpacing: 10,
                 mainAxisExtent: 240,
               ),
             )
-          : CircularProgressIndicator(),
-    ));
+          : Center(child: CircularProgressIndicator()),
+    );
   }
 }

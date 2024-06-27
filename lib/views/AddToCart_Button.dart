@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shopvippro_demo/themes/colors.dart';
 
 class AddtoCartButton extends StatelessWidget {

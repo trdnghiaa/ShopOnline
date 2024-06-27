@@ -1,43 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:shopvippro_demo/profile/widget/cart_provider.dart';
+import 'package:shopvippro_demo/profile/widget/login_provider.dart';
 import 'package:shopvippro_demo/views/Splash_Screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => CartProvider()),
+          ChangeNotifierProvider<LoginProvider>(
+          create: (context) => LoginProvider(),
+        ),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<FavoritesProvider>(
-          create: (context) =>
-              FavoritesProvider(), // Khởi tạo FavoritesProvider ở đây
-        ),
-        ChangeNotifierProvider<LoginProvider>(
-          create: (context) => LoginProvider(), // Khởi tạo AuthProvider ở đây
-        ),
-        // Các provider khác nếu cần thiết có thể được thêm vào đây
-      ],
-      child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            textTheme: GoogleFonts.nunitoSansTextTheme(),
-          ),
-          initialRoute: '/splash', // Định nghĩa route khởi đầu
-          routes: {
-            '/splash': (context) => SplashPage(), // Route cho trang Splash
-            '/login': (context) => LoginPage(
-                  onLoginSuccess: () {
-                    // Xử lý sau khi đăng nhập thành công
-                    Navigator.pushReplacementNamed(context, '/home');
-                  },
-                ), // Định nghĩa route cho trang đăng nhập và truyền tham số 'onLoginSuccess'
-            '/home': (context) => HomeFragment(),
-            '/register': (context) => RegisterPage(),
-          } // Route cho trang chủ
-          ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        textTheme: GoogleFonts.nunitoSansTextTheme(),
+      ),
+      home: const SplashScreen(),
     );
   }
 }

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:shopvippro_demo/constants/colors.dart';
+import 'package:shopvippro_demo/themes/colors.dart';
 
-
-class RegisterButton extends StatelessWidget {
+class CreateNewAccountButton extends StatelessWidget {
   final String text;
   final void Function()? onTap;
-  const RegisterButton(
+  const CreateNewAccountButton(
       {super.key, required this.text, required this.onTap});
 
   @override
@@ -13,7 +12,6 @@ class RegisterButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 200,
         decoration: BoxDecoration(
           color: createAccount,
           borderRadius: BorderRadius.circular(40),
