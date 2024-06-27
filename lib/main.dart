@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'package:shopvippro_demo/pages/login_page.dart';
-import 'package:shopvippro_demo/pages/Register_page.dart';
-import 'package:shopvippro_demo/views/splash_page.dart';
-import 'package:shopvippro_demo/views/home_fragment.dart';
-import 'package:shopvippro_demo/widgets/favorites_provider.dart';
-import 'package:shopvippro_demo/widgets/login_provider.dart';
+import 'package:shopvippro_demo/views/Splash_Screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
