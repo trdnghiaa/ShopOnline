@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:modern_form_line_awesome_icons/modern_form_line_awesome_icons.dart';
 import 'package:provider/provider.dart';
 
-import 'package:shopvippro_demo/Profile/Update_Profile_page.dart';
 import 'package:shopvippro_demo/constants/text_strings.dart';
 import 'package:shopvippro_demo/pages/Favorites_page.dart';
+import 'package:shopvippro_demo/pages/Login_page.dart';
+import 'package:shopvippro_demo/pages/profile/Update_Profile_page.dart';
 import 'package:shopvippro_demo/widgets/login_provider.dart';
 import 'package:shopvippro_demo/widgets/menu_profile_widget.dart';
 import 'package:shopvippro_demo/constants/colors.dart';
@@ -27,9 +28,8 @@ class ProfilePage extends StatelessWidget {
                       width: 120,
                       height: 120,
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(100),
-                        child: Image.asset("lib/assets/avatar.png")
-                      )),
+                          borderRadius: BorderRadius.circular(100),
+                          child: Image.asset("lib/assets/avatar.png"))),
                   Positioned(
                     bottom: 0,
                     right: 0,
@@ -49,18 +49,18 @@ class ProfilePage extends StatelessWidget {
                   )
                 ],
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 20),
               Consumer<LoginProvider>(builder: (context, loginProvider, child) {
                 return Text(
-                  '${loginProvider.username}',
+                  loginProvider.isLoggedIn
+                      ? 'Hello, ${loginProvider.username}'
+                      : '',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 );
               }),
-              const SizedBox(height: 15,),
-
               const SizedBox(
                 height: 20,
               ),
@@ -89,7 +89,6 @@ class ProfilePage extends StatelessWidget {
               const SizedBox(
                 height: 15,
               ),
-              //Menu
               ProfileMenuWidget(
                 title: tMenuProfile1,
                 icon: LineAwesomeIcons.cogs,
@@ -100,19 +99,14 @@ class ProfilePage extends StatelessWidget {
                 icon: LineAwesomeIcons.heart_o,
                 onTap: () {
                   Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => FavoritesPage(),
-      ),
-    );
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => FavoritesPage(),
+                    ),
+                  );
                 },
               ),
-              const Divider(
-                color: Colors.grey,
-              ),
-              // const Divider(
-              //   height: 50,
-              // ),
+              const Divider(),
               ProfileMenuWidget(
                 title: tMenuProfile3,
                 icon: LineAwesomeIcons.info_circle,
@@ -124,10 +118,20 @@ class ProfilePage extends StatelessWidget {
                 textColor: Colors.red,
                 endIcon: false,
                 onTap: () {
+                  context.read<LoginProvider>().logout();
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => HomeFragment(),
+                      builder: (context) => LoginPage(
+                        onLoginSuccess: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HomeFragment(),
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   );
                 },

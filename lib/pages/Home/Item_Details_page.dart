@@ -56,18 +56,12 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
       showDialog(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-          title: Text('Please log in to use'),
-          content: Text('You need to be logged in to perform this action.'),
+          title: Text(tCheckLoginTitle),
+          content: Text(tCheckLoginContent),
           actions: <Widget>[
             TextButton(
               onPressed: () => Navigator.pop(context),
               child: Text('Close'),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/login');
-              },
-              child: Text('Login'),
             ),
           ],
         ),

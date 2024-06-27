@@ -50,15 +50,12 @@ class _LoginPageState extends State<LoginPage> {
     });
 
     if (success) {
-      context.read<LoginProvider>().login();
+      context.read<LoginProvider>().login(username);
       widget.onLoginSuccess();
-      
     } else {
       // Login failed
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-            content: Text(
-                'Failed to Login, Please check username or password again !')),
+        SnackBar(content: Text(tCheckLogin)),
       );
     }
   }

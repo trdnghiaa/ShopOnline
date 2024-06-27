@@ -35,3 +35,8 @@ const String tPhoneNum = "Phone Number";
 
 //Home Page
 const String tNewArrivals = "New Arrivals";
+
+//Dialog Alert
+const String tCheckLoginTitle = "Please Log In ";
+const String tCheckLoginContent = "You need to be logged in to perform this action. ";
+const String tCheckLogin ="Failed to Login, Please check username or password again !";
