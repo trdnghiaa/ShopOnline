@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'post.dart'; // Đảm bảo đường dẫn đúng đến post.dart
+import 'package:shopvippro_demo/models/post.dart';
+
 
 class CartItem {
   final Product product;

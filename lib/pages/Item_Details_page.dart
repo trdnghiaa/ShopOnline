@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shopvippro_demo/models/cart_provider.dart';
+import 'package:shopvippro_demo/profile/widget/cart_provider.dart';
 import 'package:shopvippro_demo/models/post.dart';
+import 'package:shopvippro_demo/constants/text_strings.dart';
+import 'package:shopvippro_demo/profile/widget/login_provider.dart';
 import 'package:shopvippro_demo/views/AddToCart_Button.dart'; // Đảm bảo import đúng đường dẫn tới file post.dart
 
 class ItemDetailsPage extends StatefulWidget {
@@ -31,18 +33,39 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
   }
 
   void addToCart() {
+    final authProvider = context.read<LoginProvider>();
     final cart = Provider.of<CartProvider>(context, listen: false);
-    cart.addItem(widget.product);
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Đã thêm ${widget.product.title} vào giỏ hàng')),
-    );
+    print('User is logged in: ${authProvider.isLoggedIn}');
+     if (authProvider.isLoggedIn) {
+        cart.addItem(widget.product);
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: Text('Please log in to use'),
+          content: Text('You need to be logged in to perform this action.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Close'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/login');
+              },
+              child: Text('Login'),
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Chi tiết sản phẩm'),
+        title: Text('Detail of ${widget.product.title}'),
         backgroundColor: Colors.transparent,
         elevation: 0,
         foregroundColor: Colors.grey[900],
@@ -80,7 +103,7 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
                   ),
                   const SizedBox(height: 20),
                   Text(
-                    'Mô tả:',
+                    'Description:',
                     style: TextStyle(color: Colors.grey[900], fontWeight: FontWeight.bold, fontSize: 18),
                   ),
                   const SizedBox(height: 5),

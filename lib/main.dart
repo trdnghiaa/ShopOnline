@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:shopvippro_demo/models/cart_provider.dart';
+import 'package:shopvippro_demo/profile/widget/cart_provider.dart';
+import 'package:shopvippro_demo/profile/widget/login_provider.dart';
 import 'package:shopvippro_demo/views/Splash_Screen.dart';
 
 void main() {
@@ -9,6 +10,9 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => CartProvider()),
+          ChangeNotifierProvider<LoginProvider>(
+          create: (context) => LoginProvider(),
+        ),
       ],
       child: MyApp(),
     ),
