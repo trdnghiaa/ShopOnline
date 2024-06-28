@@ -44,12 +44,12 @@ class _RegisterPageState extends State<RegisterPage> {
 
       if (isRegistered) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('User registered successfully')),
+          SnackBar(content: Text(tRegisterSuccess)),
         );
         // Chuyển hướng đến trang đăng nhập hoặc trang chính
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to register user')),
+          SnackBar(content: Text(tRegisterFailed)),
         );
       }
     }

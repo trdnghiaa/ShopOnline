@@ -40,3 +40,6 @@ const String tNewArrivals = "New Arrivals";
 const String tCheckLoginTitle = "Please Log In ";
 const String tCheckLoginContent = "You need to be logged in to perform this action. ";
 const String tCheckLogin ="Failed to Login, Please check username or password again !";
+const String tRegisterSuccess="Registered successfully";
+const String tRegisterFailed="Failed to register user";
+

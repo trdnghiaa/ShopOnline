@@ -62,7 +62,7 @@ class ProfilePage extends StatelessWidget {
                 );
               }),
               const SizedBox(
-                height: 20,
+                height: 15,
               ),
               SizedBox(
                 child: ElevatedButton(
