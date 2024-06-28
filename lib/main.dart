@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +24,8 @@ class MyApp extends StatelessWidget {
               FavoritesProvider(), // Khởi tạo FavoritesProvider ở đây
         ),
         ChangeNotifierProvider<LoginProvider>(
-          create: (context) => LoginProvider(), // Khởi tạo AuthProvider ở đây
+          create: (context) =>
+              LoginProvider(), // Khởi tạo CategoryProvider ở đây
         ),
         // Các provider khác nếu cần thiết có thể được thêm vào đây
       ],
