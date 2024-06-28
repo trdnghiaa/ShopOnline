@@ -52,7 +52,7 @@ class ProfilePage extends StatelessWidget {
               const SizedBox(height: 10),
               Consumer<LoginProvider>(builder: (context, loginProvider, child) {
                 return Text(
-                  'Hello, ${loginProvider.username}',
+                  'Welcome, ${loginProvider.username}',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -60,7 +60,7 @@ class ProfilePage extends StatelessWidget {
                 );
               }),
               const SizedBox(
-                height: 15,
+                height: 10,
               ),
               SizedBox(
                 child: ElevatedButton(

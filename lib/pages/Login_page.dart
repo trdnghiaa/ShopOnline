@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:shopvippro_demo/constants/text_strings.dart';
 import 'package:shopvippro_demo/models/user.dart';
 import 'package:shopvippro_demo/pages/Register_page.dart';
-import 'package:shopvippro_demo/profile/Profile_page.dart';
 import 'package:shopvippro_demo/services/Authentication.dart';
 import 'package:shopvippro_demo/views/Register_button.dart';
 import 'package:shopvippro_demo/views/Home_Fragment.dart';

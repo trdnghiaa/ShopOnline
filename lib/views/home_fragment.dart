@@ -7,7 +7,7 @@ import 'package:shopvippro_demo/pages/Home/Home_page.dart';
 import 'package:shopvippro_demo/pages/Cart_page.dart';
 import 'package:shopvippro_demo/pages/Login_page.dart';
 import 'package:shopvippro_demo/constants/colors.dart';
-import 'package:shopvippro_demo/profile/Profile_page.dart';
+import 'package:shopvippro_demo/pages/profile/Profile_page.dart';
 
 class HomeFragment extends StatefulWidget {
   const HomeFragment({Key? key}) : super(key: key);
