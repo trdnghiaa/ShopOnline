@@ -51,8 +51,9 @@ class FavoritesPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                         child: Image.network(
                           favorites[index].image,
-                          
-                          fit: BoxFit.cover,
+                          width: 50,
+                          height: 60,
+                          fit: BoxFit.fill,
                         ),
                       ),
                       title: Text(

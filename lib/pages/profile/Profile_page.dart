@@ -49,12 +49,10 @@ class ProfilePage extends StatelessWidget {
                   )
                 ],
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
               Consumer<LoginProvider>(builder: (context, loginProvider, child) {
                 return Text(
-                  loginProvider.isLoggedIn
-                      ? 'Hello, ${loginProvider.username}'
-                      : '',
+                  'Hello, ${loginProvider.username}',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,

@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:shopvippro_demo/models/user.dart';
 
 class AuthService {
-  final String baseUrl = 'http://192.168.1.214:3000/api/auth';
+  final String baseUrl = 'http://192.168.1.28:3000/api/auth';
 
   Future<bool> register(User user) async {
     final response = await http.post(

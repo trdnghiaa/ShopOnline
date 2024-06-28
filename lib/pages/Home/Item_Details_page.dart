@@ -7,6 +7,7 @@ import 'package:shopvippro_demo/constants/colors.dart';
 import 'package:shopvippro_demo/pages/Favorites_page.dart';
 import 'package:shopvippro_demo/views/AddToCart_Button.dart';
 import 'package:shopvippro_demo/models/product.dart';
+import 'package:shopvippro_demo/widgets/cart_provider.dart';
 import 'package:shopvippro_demo/widgets/favorites_provider.dart';
 import 'package:shopvippro_demo/widgets/login_provider.dart';
 
@@ -38,7 +39,28 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
   }
 
   //add to cart
-  void addToCart() {}
+  void addToCart() {
+    final authProvider = context.read<LoginProvider>();
+    final cart = Provider.of<CartProvider>(context, listen: false);
+    print('User is logged in: ${authProvider.isLoggedIn}');
+    if (authProvider.isLoggedIn) {
+      cart.addItem(widget.product);
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: Text(tCheckLoginTitle),
+          content: Text(tCheckLoginContent),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Close'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
 
   void addToFavorite() {
     final authProvider = context.read<LoginProvider>();
@@ -71,8 +93,9 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final isFavorite = context.watch<FavoritesProvider>().isFavorite(widget.product);
-    
+    final isFavorite =
+        context.watch<FavoritesProvider>().isFavorite(widget.product);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -231,7 +254,13 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
                   height: 20,
                 ),
                 //add to cart button
-                AddtoCartButton(text: "Add to cart", onTap: addToCart),
+                AddtoCartButton(
+                  text: "Add to cart",
+                  onTap: addToCart,
+                  productImageUrl: widget.product.image,
+                  productName: widget.product.title,
+                  productPrice: widget.product.price,
+                ),
               ],
             ),
           )
