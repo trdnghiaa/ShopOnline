@@ -7,7 +7,6 @@ import 'package:shopvippro_demo/pages/login_page.dart';
 import 'package:shopvippro_demo/pages/Register_page.dart';
 import 'package:shopvippro_demo/views/splash_page.dart';
 import 'package:shopvippro_demo/views/home_fragment.dart';
-import 'package:shopvippro_demo/widgets/category_provider.dart';
 import 'package:shopvippro_demo/widgets/favorites_provider.dart';
 import 'package:shopvippro_demo/widgets/login_provider.dart';
 
@@ -23,9 +22,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<FavoritesProvider>(
           create: (context) =>
               FavoritesProvider(), // Khởi tạo FavoritesProvider ở đây
-        ),
-        ChangeNotifierProvider<CategoryProvider>(
-          create: (context) => CategoryProvider(),
         ),
         ChangeNotifierProvider<LoginProvider>(
           create: (context) =>
