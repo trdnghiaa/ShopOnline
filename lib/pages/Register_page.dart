@@ -44,12 +44,18 @@ class _RegisterPageState extends State<RegisterPage> {
 
       if (isRegistered) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(tRegisterSuccess)),
+          SnackBar(
+            content: Text(tRegisterSuccess),
+            backgroundColor: Colors.green,
+          ),
         );
         // Chuyển hướng đến trang đăng nhập hoặc trang chính
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(tRegisterFailed)),
+          SnackBar(
+            content: Text(tRegisterFailed),
+            backgroundColor: Colors.red,
+          ),
         );
       }
     }
@@ -105,21 +111,20 @@ class _RegisterPageState extends State<RegisterPage> {
                     border: Border.all(color: _passwordColor),
                     borderRadius: BorderRadius.circular(8)),
                 child: TextFormField(
-                  controller: _passwordController,
-                  focusNode: _passwordTFFocusNode,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter an password';
-                    }
-                    return null;
-                  },
-                  decoration: InputDecoration(
-                    icon: Icon(LineAwesomeIcons.key),
-                    labelText: tPassword,
-                    border: InputBorder.none,
-                  ),
-                  obscureText: true
-                ),
+                    controller: _passwordController,
+                    focusNode: _passwordTFFocusNode,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter an password';
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                      icon: Icon(LineAwesomeIcons.key),
+                      labelText: tPassword,
+                      border: InputBorder.none,
+                    ),
+                    obscureText: true),
               ),
               const SizedBox(
                 height: 15,

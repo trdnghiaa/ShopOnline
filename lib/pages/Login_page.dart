@@ -54,7 +54,10 @@ class _LoginPageState extends State<LoginPage> {
     } else {
       // Login failed
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(tCheckLogin)),
+        SnackBar(
+          content: Text(tCheckLogin),
+          backgroundColor: Colors.red,
+        ),
       );
     }
   }

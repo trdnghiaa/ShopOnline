@@ -66,7 +66,10 @@ class _CategoryPageState extends State<CategoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // title: Text(widget.selectedCategory.toString().split('.').last),
+        title: Text(
+          widget.selectedCategory.toString().split('.').last,
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        ),
         actions: [
           IconButton(
             icon: Icon(LineAwesomeIcons.search),
@@ -105,14 +108,30 @@ class _CategoryPageState extends State<CategoryPage> {
           ? ListView.builder(
               itemCount: filteredCategories.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(filteredCategories[index].title),
-                  leading: CircleAvatar(
-                    backgroundImage: filteredCategories[index].image.isNotEmpty
-                        ? NetworkImage(filteredCategories[index].image)
-                        : AssetImage('assets/placeholder.png') as ImageProvider,
+                return Card(
+                  margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  elevation: 5,
+                  child: ListTile(
+                    contentPadding: EdgeInsets.all(10),
+                    title: Text(
+                      filteredCategories[index].title,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    ),
+                    leading: CircleAvatar(
+                      backgroundImage:
+                          filteredCategories[index].image.isNotEmpty
+                              ? NetworkImage(filteredCategories[index].image)
+                              : AssetImage('assets/placeholder.png')
+                                  as ImageProvider,
+                    ),
+                    subtitle: Text(
+                      filteredCategories[index].description,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    onTap: () => navigateToItemDetails(index),
                   ),
-                  onTap: () => navigateToItemDetails(index),
                 );
               },
             )

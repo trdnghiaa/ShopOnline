@@ -1,24 +1,124 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:modern_form_line_awesome_icons/modern_form_line_awesome_icons.dart';
 import 'package:shopvippro_demo/constants/colors.dart';
 import 'package:shopvippro_demo/constants/text_strings.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'dart:convert';
 
+import 'package:shopvippro_demo/services/Authentication.dart';
 
-class UpdateProfilePage extends StatelessWidget {
+class UpdateProfilePage extends StatefulWidget {
   UpdateProfilePage({super.key});
 
-  static Color _selectedColor = Colors.black;
-  static Color _unSelectedColor = Colors.grey;
+  @override
+  _UpdateProfilePageState createState() => _UpdateProfilePageState();
+}
+
+class _UpdateProfilePageState extends State<UpdateProfilePage> {
+  static const Color _selectedColor = Colors.black;
+  static const Color _unSelectedColor = Colors.grey;
 
   Color _usernameColor = _unSelectedColor;
   Color _passwordColor = _unSelectedColor;
   Color _emailColor = _unSelectedColor;
   Color _phoneColor = _unSelectedColor;
 
-  FocusNode _usernameTFFocusNode = FocusNode();
-  FocusNode _passwordTFFocusNode = FocusNode();
-  FocusNode _emailTFFocusNode = FocusNode();
-  FocusNode _phoneTFFocusNode = FocusNode();
+  final FocusNode _usernameTFFocusNode = FocusNode();
+  final FocusNode _passwordTFFocusNode = FocusNode();
+  final FocusNode _emailTFFocusNode = FocusNode();
+  final FocusNode _phoneTFFocusNode = FocusNode();
+
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+
+  final storage = const FlutterSecureStorage();
+
+  @override
+  void initState() {
+    super.initState();
+    _setupFocusNodes();
+  }
+
+  void _setupFocusNodes() {
+    _usernameTFFocusNode.addListener(() {
+      setState(() {
+        _usernameColor =
+            _usernameTFFocusNode.hasFocus ? _selectedColor : _unSelectedColor;
+      });
+    });
+    _passwordTFFocusNode.addListener(() {
+      setState(() {
+        _passwordColor =
+            _passwordTFFocusNode.hasFocus ? _selectedColor : _unSelectedColor;
+      });
+    });
+    _emailTFFocusNode.addListener(() {
+      setState(() {
+        _emailColor =
+            _emailTFFocusNode.hasFocus ? _selectedColor : _unSelectedColor;
+      });
+    });
+    _phoneTFFocusNode.addListener(() {
+      setState(() {
+        _phoneColor =
+            _phoneTFFocusNode.hasFocus ? _selectedColor : _unSelectedColor;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _usernameTFFocusNode.dispose();
+    _passwordTFFocusNode.dispose();
+    _emailTFFocusNode.dispose();
+    _phoneTFFocusNode.dispose();
+
+    _usernameController.dispose();
+    _passwordController.dispose();
+    _emailController.dispose();
+    _phoneController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _updateProfile() async {
+  final String username = _usernameController.text;
+  final String password = _passwordController.text;
+  final String email = _emailController.text;
+  final String phone = _phoneController.text;
+
+  if (username.isEmpty || email.isEmpty || phone.isEmpty) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(tFillFields),
+      backgroundColor: Colors.red,
+    ));
+    return;
+  }
+
+  final Map<String, dynamic> updatedData = {
+    'userId': await storage.read(key: 'userId'),
+    'username': username,
+    'password': password,
+    'email': email,
+    'phone': phone,
+  };
+
+  try {
+    await AuthService().updateUserProfile(updatedData);
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(tUpdateSuccess),
+      backgroundColor: Colors.green,
+    ));
+  } catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text('An error occurred: $e'),
+      backgroundColor: Colors.red,
+    ));
+  }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +139,7 @@ class UpdateProfilePage extends StatelessWidget {
                   height: 120,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(100),
-                    child: Image.asset("lib/assets/avatar.png")
+                    child: Image.asset("lib/assets/avatar.png"),
                   )),
               Positioned(
                   bottom: 0,
@@ -64,72 +164,42 @@ class UpdateProfilePage extends StatelessWidget {
             Form(
                 child: Column(
               children: [
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 22),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: _usernameColor),
-                      borderRadius: BorderRadius.circular(8)),
-                  child: TextField(
-                    focusNode: _usernameTFFocusNode,
-                    decoration: InputDecoration(
-                        icon: Icon(LineAwesomeIcons.user),
-                        labelText: tUsername,
-                        labelStyle: TextStyle(color: Colors.black),
-                        border: InputBorder.none),
-                  ),
+                _buildTextField(
+                  controller: _usernameController,
+                  focusNode: _usernameTFFocusNode,
+                  label: tUsername,
+                  icon: LineAwesomeIcons.user,
+                  borderColor: _usernameColor,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 12,
                 ),
-                //Textfiled Password
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 22),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: _passwordColor),
-                      borderRadius: BorderRadius.circular(8)),
-                  child: TextField(
-                    focusNode: _passwordTFFocusNode,
-                    decoration: InputDecoration(
-                        icon: Icon(LineAwesomeIcons.key),
-                        labelText: tPassword,
-                        labelStyle: TextStyle(color: Colors.black),
-                        border: InputBorder.none),
-                  ),
+                _buildTextField(
+                  controller: _passwordController,
+                  focusNode: _passwordTFFocusNode,
+                  label: tPassword,
+                  icon: LineAwesomeIcons.key,
+                  borderColor: _passwordColor,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 12,
                 ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 22),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: _emailColor),
-                      borderRadius: BorderRadius.circular(8)),
-                  child: TextField(
-                    focusNode: _emailTFFocusNode,
-                    decoration: InputDecoration(
-                        icon: Icon(LineAwesomeIcons.envelope),
-                        labelText: tEmail,
-                        labelStyle: TextStyle(color: Colors.black),
-                        border: InputBorder.none),
-                  ),
+                _buildTextField(
+                  controller: _emailController,
+                  focusNode: _emailTFFocusNode,
+                  label: tEmail,
+                  icon: LineAwesomeIcons.envelope,
+                  borderColor: _emailColor,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 12,
                 ),
-                //Textfiled Password
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 22),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: _phoneColor),
-                      borderRadius: BorderRadius.circular(8)),
-                  child: TextField(
-                    focusNode: _phoneTFFocusNode,
-                    decoration: InputDecoration(
-                        icon: Icon(LineAwesomeIcons.phone),
-                        labelText: "Phone",
-                        labelStyle: TextStyle(color: Colors.black),
-                        border: InputBorder.none),
-                  ),
+                _buildTextField(
+                  controller: _phoneController,
+                  focusNode: _phoneTFFocusNode,
+                  label: "Phone",
+                  icon: LineAwesomeIcons.phone,
+                  borderColor: _phoneColor,
                 ),
               ],
             )),
@@ -138,7 +208,7 @@ class UpdateProfilePage extends StatelessWidget {
             ),
             SizedBox(
               child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: _updateProfile,
                   style: ElevatedButton.styleFrom(
                       backgroundColor: primaryColor,
                       side: BorderSide.none,
@@ -150,5 +220,29 @@ class UpdateProfilePage extends StatelessWidget {
             ),
           ]),
         )));
+  }
+
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required FocusNode focusNode,
+    required String label,
+    required IconData icon,
+    required Color borderColor,
+  }) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 22),
+      decoration: BoxDecoration(
+          border: Border.all(color: borderColor),
+          borderRadius: BorderRadius.circular(8)),
+      child: TextField(
+        controller: controller,
+        focusNode: focusNode,
+        decoration: InputDecoration(
+            icon: Icon(icon),
+            labelText: label,
+            labelStyle: const TextStyle(color: Colors.black),
+            border: InputBorder.none),
+      ),
+    );
   }
 }

@@ -42,9 +42,12 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
   void addToCart() {
     final authProvider = context.read<LoginProvider>();
     final cart = Provider.of<CartProvider>(context, listen: false);
-    print('User is logged in: ${authProvider.isLoggedIn}');
+
     if (authProvider.isLoggedIn) {
       cart.addItem(widget.product);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(tAddToCart), backgroundColor: Colors.green,),
+      );
     } else {
       showDialog(
         context: context,
@@ -65,8 +68,6 @@ class _ItemDetailsPageState extends State<ItemDetailsPage> {
   void addToFavorite() {
     final authProvider = context.read<LoginProvider>();
     final favoritesProvider = context.read<FavoritesProvider>();
-
-    print('User is logged in: ${authProvider.isLoggedIn}');
 
     if (authProvider.isLoggedIn) {
       if (favoritesProvider.isFavorite(widget.product)) {

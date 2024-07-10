@@ -1,6 +1,5 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:shopvippro_demo/pages/login_page.dart';
@@ -11,7 +10,8 @@ import 'package:shopvippro_demo/widgets/cart_provider.dart';
 import 'package:shopvippro_demo/widgets/favorites_provider.dart';
 import 'package:shopvippro_demo/widgets/login_provider.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: ".env");
   runApp(MyApp());
 }
 

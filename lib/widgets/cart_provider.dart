@@ -13,31 +13,31 @@ class CartItem {
 }
 
 class CartProvider with ChangeNotifier {
-  List<CartItem> _items = [];
+  List<CartItem> _cart = [];
 
-  List<CartItem> get items => _items;
+  List<CartItem> get carts => _cart;
 
-  double get totalPrice => _items.fold(0, (sum, item) => sum + item.product.price * item.quantity);
+  double get totalPrice => _cart.fold(0, (sum, item) => sum + item.product.price * item.quantity);
 
   void addItem(Product product) {
-    for (var item in _items) {
+    for (var item in _cart) {
       if (item.product.id == product.id) {
         item.quantity++;
         notifyListeners();
         return;
       }
     }
-    _items.add(CartItem(product: product));
+    _cart.add(CartItem(product: product));
     notifyListeners();
   }
 
   void removeItem(int productId) {
-    _items.removeWhere((item) => item.product.id == productId);
+    _cart.removeWhere((item) => item.product.id == productId);
     notifyListeners();
   }
 
   void clearCart() {
-    _items.clear();
+    _cart.clear();
     notifyListeners();
   }
 }

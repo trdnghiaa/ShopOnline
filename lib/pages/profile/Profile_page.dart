@@ -89,7 +89,7 @@ class ProfilePage extends StatelessWidget {
               ),
               ProfileMenuWidget(
                 title: tMenuProfile1,
-                icon: LineAwesomeIcons.cogs,
+                icon: LineAwesomeIcons.shopping_cart,
                 onTap: () {},
               ),
               ProfileMenuWidget(

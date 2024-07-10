@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:modern_form_line_awesome_icons/modern_form_line_awesome_icons.dart';
 import 'package:shopvippro_demo/constants/colors.dart';
 import 'package:shopvippro_demo/constants/text_strings.dart';
+import 'package:shopvippro_demo/pages/checkout_page.dart';
 import 'package:shopvippro_demo/widgets/cart_provider.dart';
 import 'package:shopvippro_demo/widgets/cart_provider.dart';
 
@@ -14,7 +15,7 @@ class CartPage extends StatelessWidget {
         builder: (context, cart, child) {
           return Container(
             padding: EdgeInsets.all(16),
-            child: cart.items.isEmpty
+            child: cart.carts.isEmpty
                 ? Center(
                     child: Text(
                       'Your cart is empty',
@@ -25,9 +26,9 @@ class CartPage extends StatelessWidget {
                     children: [
                       Expanded(
                         child: ListView.builder(
-                          itemCount: cart.items.length,
+                          itemCount: cart.carts.length,
                           itemBuilder: (context, index) {
-                            final item = cart.items[index];
+                            final item = cart.carts[index];
                             return Card(
                               elevation: 2,
                               margin: EdgeInsets.symmetric(vertical: 8),
@@ -84,20 +85,25 @@ class CartPage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            child: Text('Purchase'),
-                            onPressed: () {
-                              // Xử lý sự kiện thanh toán ở đây
-                            },
-                          ),
+                       Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    child: Text('Checkout'),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CheckoutPage(),
                         ),
-                      ),
-                    ],
+                      );
+                    },
                   ),
+                ),
+              ),
+            ],
+          )
           );
         },
       ),

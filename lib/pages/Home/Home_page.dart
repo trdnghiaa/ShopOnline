@@ -46,7 +46,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   void dispose() {
-    // If you have any ongoing API requests, cancel them here.
     super.dispose();
   }
 
