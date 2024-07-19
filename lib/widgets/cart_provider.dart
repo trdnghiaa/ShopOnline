@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shopvippro_demo/models/product.dart';
 
-
 class CartItem {
   final Product product;
   int quantity;
@@ -14,8 +13,10 @@ class CartItem {
 
 class CartProvider with ChangeNotifier {
   List<CartItem> _cart = [];
+  List<CartItem> _purchasedItems = []; // List to store purchased items
 
   List<CartItem> get carts => _cart;
+  List<CartItem> get purchasedItems => _purchasedItems;
 
   double get totalPrice => _cart.fold(0, (sum, item) => sum + item.product.price * item.quantity);
 
@@ -38,6 +39,12 @@ class CartProvider with ChangeNotifier {
 
   void clearCart() {
     _cart.clear();
+    notifyListeners();
+  }
+
+  void purchaseItems() {
+    _purchasedItems.addAll(_cart);
+    clearCart();
     notifyListeners();
   }
 }

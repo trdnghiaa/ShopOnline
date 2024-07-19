@@ -15,7 +15,7 @@ class RegisterButton extends StatelessWidget {
       child: Container(
         width: 200,
         decoration: BoxDecoration(
-          color: createAccount,
+          color: colorApp,
           borderRadius: BorderRadius.circular(40),
         ),
         padding: EdgeInsets.all(10),

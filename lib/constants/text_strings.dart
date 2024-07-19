@@ -2,53 +2,55 @@
 const String tNameApp = "LUONVUITUOI";
 
 //Menu Bottom Fragment
-const String tMenuBottom1 = "Home";
-const String tMenuBottom2 = "Category";
-const String tMenuBottom3 = "Cart";
-const String tMenuBottom4 = "Me";
+const String tMenuBottom1 = "Trang chủ";
+const String tMenuBottom2 = "Thể loại";
+const String tMenuBottom3 = "Giỏ hàng";
+const String tMenuBottom4 = "Cá nhân";
 
 //Item Details
-const String tItemDetails = "Details";
-const String tDescription = "Description";
+const String tItemDetails = "Chi tiết sản phẩm";
+const String tDescription = "Mô tả";
 
 //Profile Page
-const String tProfile = "Profile";
+const String tProfile = "Thông tin cá nhân";
 const String tEmail = "Email";
-const String tUsername = "Username";
-const String tPassword = "Password";
-const String tMenuProfile1 = "History";
-const String tMenuProfile2 = "Favorite";
-const String tMenuProfile3 = "Information";
-const String tMenuProfile4 = "Log out";
-
-//Update Profile Page
-const String tEditProfile = "Edit Profile";
-
-//Favorites Page
-const String tFavorites = "Favorites";
-
-//Login Page
-
-//Update Profile Page
-const String tFillFields = "Please fill in all required fields";
-const String tUpdateSuccess = "Update Profile successfully";
-
-//Cart Page
-const String tEmptyCart = "Your cart is empty";
-
-//Register Page
-const String tCreateNewAccount = "Create New Account";
-const String tPhoneNum = "Phone Number";
+const String tUsername = "Tài khoản";
+const String tPassword = "Mật khẩu";
+const String tMenuProfile1 = "Lịch sử mua hàng";
+const String tMenuProfile2 = "Yêu thích";
+const String tMenuProfile3 = "Thông tin";
+const String tMenuProfile4 = "Đăng xuất";
 
 //Home Page
-const String tNewArrivals = "New Arrivals";
+const String tNewArrivals = "Sản phẩm nổi bật";
+//Update Profile Page
+const String tEditProfile = "Chỉnh sửa thông tin";
+//Favorites Page
+const String tFavorites = "Yêu thích";
+//Order History
+const String tOrder = "Lịch sử mua hàng";
+const String tEmptyOrder = "Lịch sử mua hàng trống";
+//Login Page
+const String tLogin = "Đăng nhập";
+//Update Profile Page
+const String tFillFields = "Vui lòng điền đầy đủ thông tin";
+const String tUpdateSuccess = "Chỉnh sửa thành công";
+//Cart Page
+const String tEmptyCart = "Giỏ hàng đang trống";
+//Register Page
+const String tRegisterPage = "Đăng ký tài khoản";
+const String tCreateNewAccount = "Bạn chưa có tài khoản ?";
+const String tPhoneNum = "Số điện thoại";
+
+//Checkout Page
+const String tCheckOut = "Thanh toán";
 
 //Dialog Alert
-const String tCheckLoginTitle = "Please Log In ";
+const String tCheckLoginTitle = "Bạn chưa đăng nhập";
 const String tCheckLoginContent =
-    "You need to be logged in to perform this action. ";
+    "Bạn cần đăng nhập để thực hiện thao tác này !";
 const String tCheckLogin =
-    "Failed to Login, Please check username or password again !";
-const String tRegisterSuccess = "Registered successfully";
-const String tRegisterFailed = "Failed to register user";
-const String tAddToCart = "Add to cart successfully";
+    "Đăng nhập thất bại, hãy kiểm tra lại tài khoản hoặc mật khẩu";
+const String tRegisterSuccess = "Đăng ký thành công";
+const String tRegisterFailed = "Đăng ký thất bại";
+const String tAddToCart = "Thêm vào giỏ hàng thành công";

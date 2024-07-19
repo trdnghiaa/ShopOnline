@@ -14,17 +14,17 @@ class LoginButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: createAccount,
+          color: colorApp,
           borderRadius: BorderRadius.circular(40),
         ),
         padding: EdgeInsets.all(15),
-        margin: EdgeInsets.fromLTRB(100, 10, 100, 0),
+        margin: EdgeInsets.fromLTRB(95, 10, 95, 0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               text,
-              style: TextStyle(color: Colors.white, fontSize: 15),
+              style: TextStyle(color: Colors.white, fontSize: 17),
             )
           ],
         ),

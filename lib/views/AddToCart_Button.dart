@@ -24,16 +24,17 @@ const AddtoCartButton({
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: secondaryColor,
+          color: btnAddToCart,
           borderRadius: BorderRadius.circular(40),
         ),
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.all(18),
+        margin: EdgeInsets.fromLTRB(40,0,40,0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               text,
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.white, fontSize: 20),
             )
           ],
         ),

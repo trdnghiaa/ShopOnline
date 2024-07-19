@@ -1,29 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:modern_form_line_awesome_icons/modern_form_line_awesome_icons.dart';
-import 'package:shopvippro_demo/pages/Category_page.dart';
+import 'package:shopvippro_demo/screen/CateScreen.dart';
 import 'package:shopvippro_demo/models/product.dart';
 import 'package:shopvippro_demo/constants/text_strings.dart';
-import 'package:shopvippro_demo/pages/Home/Home_page.dart';
-import 'package:shopvippro_demo/pages/Cart_page.dart';
-import 'package:shopvippro_demo/pages/Login_page.dart';
+import 'package:shopvippro_demo/screen/Home/HomeScreen.dart';
+import 'package:shopvippro_demo/screen/CartScreen.dart';
+import 'package:shopvippro_demo/screen/LoginScreen.dart';
 import 'package:shopvippro_demo/constants/colors.dart';
-import 'package:shopvippro_demo/pages/profile/Profile_page.dart';
+import 'package:shopvippro_demo/screen/profile/Profile_page.dart';
 
 class HomeFragment extends StatefulWidget {
-  const HomeFragment({Key? key}) : super(key: key);
+  final int index;
+
+  HomeFragment({this.index = 0});
 
   @override
   State<HomeFragment> createState() => _HomeFragmentState();
 }
 
 class _HomeFragmentState extends State<HomeFragment> {
-  int _currentIndex = 0;
-
+  late int _currentIndex;
   late List<Widget> pages;
 
   @override
   void initState() {
     super.initState();
+    _currentIndex = 0;
     pages = [
       HomePage(),
       CategoryPage(selectedCategory: Category.ELECTRONICS),
@@ -46,7 +48,7 @@ class _HomeFragmentState extends State<HomeFragment> {
         title: const Text(
           tNameApp,
           style: TextStyle(
-            letterSpacing: 10,
+            letterSpacing: 8,
             fontWeight: FontWeight.bold,
             fontSize: 20,
             color: Colors.white,
@@ -63,8 +65,9 @@ class _HomeFragmentState extends State<HomeFragment> {
         elevation: 0.00,
         backgroundColor: colorApp,
       ),
-      body: Center(
-        child: pages[_currentIndex],
+      body: IndexedStack(
+        index: _currentIndex,
+        children: pages,
       ),
       bottomNavigationBar: NavigationBarTheme(
         data: NavigationBarThemeData(
@@ -79,19 +82,19 @@ class _HomeFragmentState extends State<HomeFragment> {
           destinations: const [
             NavigationDestination(
               icon: Icon(LineAwesomeIcons.home),
-              label: 'Home',
+              label: tMenuBottom1,
             ),
             NavigationDestination(
               icon: Icon(LineAwesomeIcons.list_alt),
-              label: 'Category',
+              label: tMenuBottom2,
             ),
             NavigationDestination(
               icon: Icon(LineAwesomeIcons.cart_arrow_down),
-              label: 'Cart',
+              label: tMenuBottom3,
             ),
             NavigationDestination(
               icon: Icon(LineAwesomeIcons.user),
-              label: 'Profile',
+              label: tMenuBottom4,
             ),
           ],
           selectedIndex: _currentIndex,
@@ -101,7 +104,7 @@ class _HomeFragmentState extends State<HomeFragment> {
             });
           },
           labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-          indicatorColor: Colors.white,
+          indicatorColor: btnAddToCart,
           backgroundColor: colorApp,
         ),
       ),
